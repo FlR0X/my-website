@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300&display=swap');
+
+* {
+    margin: 0;
+    padding: 0px;
+}
+
+body {
+    background: linear-gradient(90deg, rgb(16, 16, 26), rgb(16, 16, 32));
+    color: rgb(241, 113, 38);
+    font-family: "Source Code Pro", monospace;
+}
+
+
+
+.center_div {
+    padding: 15px;
+    padding-top: 40vh;
+    display: grid;
+    place-content: center;
+    text-align: center;
+}
+
+#typewriter {
+    position: relative;
+}
+
+#typewriter::before, #typewriter::after {
+    content: "";
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+}
+
+#typewriter::before {
+    background: linear-gradient(90deg, rgb(16, 16, 26), rgb(16, 16, 32));
+    animation: typewriter 2s steps(17) 1s forwards;
+}
+
+#typewriter::after {
+    margin-left: .25em;
+    width: .125em;
+    background: white;
+    animation: 
+        typewriter 2s steps(17) 1s forwards,
+        blink 750ms steps(17) infinite;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+span {
+    color: rgb(241, 113, 38);
+}
+
+#the_funny {
+    opacity: 0;
+    transform: translateY(100%);
+    animation: fadeIn 2s ease forwards;
+}
+
+@keyframes typewriter {
+    to { 
+        left: 100%; 
+    }
+}
+
+@keyframes blink {
+    to {
+        background: transparent;
+    }
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
