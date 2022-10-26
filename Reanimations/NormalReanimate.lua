@@ -35,6 +35,8 @@ sethidden = hookfunction(getgenv().sethiddenproperty,function(i,p,v)
     end
 end)
 
+wait(0.5)
+
 --reanimate by MyWorld#4430 discord.gg/pYVHtSJmEY
 local v3_net, v3_808 = Vector3.new(0, 25.1, 0), Vector3.new(8, 0, 8)
 local function getNetlessVelocity(realPartVelocity)
@@ -74,7 +76,7 @@ local method = 1 --reanimation method
 --3 - limbs + breakJoints after [loadtime] seconds
 --4 - remove humanoid + breakJoints
 --5 - remove humanoid + limbst
-local alignmode = 1 --AlignPosition mode
+local alignmode = 4 --AlignPosition mode
 --modes:
 --1 - AlignPosition rigidity enabled true
 --2 - 2 AlignPositions rigidity enabled both true and false
@@ -927,4 +929,3 @@ if flingpart0 and flingpart1 then
         end
     end
 end
-wait(0.1)
