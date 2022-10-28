@@ -1,3 +1,4 @@
+            
 local realfenv
 realfenv = hookfunction(getgenv().getfenv,function(a)
     local num = tonumber(a)
@@ -927,4 +928,3 @@ if flingpart0 and flingpart1 then
         end
     end
 end
-wait(0.1)
