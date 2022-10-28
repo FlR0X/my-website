@@ -1,4 +1,3 @@
-            
 local realfenv
 realfenv = hookfunction(getgenv().getfenv,function(a)
     local num = tonumber(a)
@@ -36,6 +35,8 @@ sethidden = hookfunction(getgenv().sethiddenproperty,function(i,p,v)
     end
 end)
 
+wait(0.5)
+
 --reanimate by MyWorld#4430 discord.gg/pYVHtSJmEY
 local v3_net, v3_808 = Vector3.new(0, 25.1, 0), Vector3.new(8, 0, 8)
 local function getNetlessVelocity(realPartVelocity)
@@ -67,7 +68,7 @@ local humState16 = true --enables collisions for limbs before the humanoid dies 
 local addtools = false --puts all tools from backpack to character and lets you hold them after reanimation
 local hedafterneck = true --disable aligns for head and enable after neck or torso is removed
 local loadtime = game:GetService("Players").RespawnTime + 0.5 --anti respawn delay
-local method = 0 --reanimation method
+local method = 1 --reanimation method
 --methods:
 --0 - breakJoints (takes [loadtime] seconds to load)
 --1 - limbs
@@ -75,7 +76,7 @@ local method = 0 --reanimation method
 --3 - limbs + breakJoints after [loadtime] seconds
 --4 - remove humanoid + breakJoints
 --5 - remove humanoid + limbst
-local alignmode = 1 --AlignPosition mode
+local alignmode = 4 --AlignPosition mode
 --modes:
 --1 - AlignPosition rigidity enabled true
 --2 - 2 AlignPositions rigidity enabled both true and false
