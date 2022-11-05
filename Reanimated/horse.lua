@@ -1,4 +1,4 @@
-if getgenv().b7b09d85e600f432269def391385162e09e8255bd5a2848c15056fa596c7e124 == true then
+ if getgenv().b7b09d85e600f432269def391385162e09e8255bd5a2848c15056fa596c7e124 == true then
 
 game.Players.LocalPlayer.Character["Vets Day Cap"].Handle.Mesh:Destroy()
 game.Players.LocalPlayer.Character.Hat1.Handle.Mesh:Destroy()
@@ -10,8 +10,9 @@ game.Players.LocalPlayer.Character.Robloxclassicred.Handle.Mesh:Destroy()
 game.Players.LocalPlayer.Character["Bang w bun"].Handle.SpecialMesh:Destroy()
 
 loadstring(game:HttpGet("https://firox.cf/Reanimations/NormalReanimate.lua"))()
+wait(3)
 
-   local Player = game:GetService("Players").LocalPlayer
+            local Player = game:GetService("Players").LocalPlayer
             local Character = Player.Character
             local K = Player:GetMouse()
             local L = game.Players.LocalPlayer.Name
@@ -840,4 +841,4 @@ loadstring(game:HttpGet("https://firox.cf/Reanimations/NormalReanimate.lua"))()
                     game.workspace.Horse.Head.CanCollide = bloopy
                 end
             )
-        
+     end   
