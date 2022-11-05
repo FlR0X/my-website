@@ -11,8 +11,7 @@ game.Players.LocalPlayer.Character["Bang w bun"].Handle.SpecialMesh:Destroy()
 
 loadstring(game:HttpGet("https://firox.cf/Reanimations/NormalReanimate.lua"))()
 
-   
-            local Player = game:GetService("Players").LocalPlayer
+   local Player = game:GetService("Players").LocalPlayer
             local Character = Player.Character
             local K = Player:GetMouse()
             local L = game.Players.LocalPlayer.Name
