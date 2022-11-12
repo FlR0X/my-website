@@ -12,14 +12,10 @@ game.Players.LocalPlayer.Character.BoyAnimeHair.Handle.Mesh:Destroy()
 game.Players.LocalPlayer.Character.AnimeShortHairAccessory9.Handle.SpecialMesh:Destroy()
 game.Players.LocalPlayer.Character["Cyber Peacock Tail 2.0"].Handle.SpecialMesh:Destroy()
 
+wait(2)
 loadstring(game:HttpGet("https://firox.cf/Reanimations/CollisionReanimate.lua"))()
+wait(2)
 
-local Player = game:GetService("Players").LocalPlayer
-    local Character = Player.Character
-    local L = game.Players.LocalPlayer.Name
-    Character["Bang w bun"].Name = "Bang w bun"
-    Character["Bang w bun"].Name = "Bang w bun1"
-    Character["Bang w bun"].Name = "Bang w bun2"
     local R = {
         rightarm = Character:WaitForChild("Bang w bun"),
         leftarm = Character:WaitForChild("Bang w bun1"),
