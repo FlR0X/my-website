@@ -1,8 +1,15 @@
-local Player = game:GetService("Players").LocalPlayer
-local Character = Player.Character
 
+game.Players.LocalPlayer.Character["Memorial Day 2009 Army Helmet"].Handle.Mesh:Destroy()
+game.Players.LocalPlayer.Character["Racing Helmet"].Handle.Mesh:Destroy()
+game.Players.LocalPlayer.Character["Racing Helmet USA"].Handle.Mesh:Destroy()
+game.Players.LocalPlayer.Character["Stinger77"].Handle.Mesh:Destroy()
+game.Players.LocalPlayer.Character["Racing Helmet Flames"].Handle.Mesh:Destroy()
+
+wait(1)
 loadstring(game:HttpGet("https://firox.cf/Reanimations/NormalReanimate.lua"))()
-
+wait(2)
+          local Player = game:GetService("Players").LocalPlayer
+            local Character = Player.Character
             local L = game.Players.LocalPlayer.Name
             local M = workspace:WaitForChild(L)
             local R = {
