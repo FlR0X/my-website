@@ -1,0 +1,52 @@
+<meta property="og:image" content="https://media.discordapp.net/attachments/786504576940376067/1061174905565098124/spec.png">
+<meta content="scot.wtf" property="og:title" />
+<meta content="scot's site" property="og:description" />
+<meta content="https://scot.wtf/" property="og:url" />
+<meta content="#FF494E" data-react-helmet="true" name="theme-color" 
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>scot.wtf</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css" media="screen">
+        <link rel="shortcut icon" href="/resources/fav.png" type="image/x-icon">
+        <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div id="start">
+            <a onclick="start()" class="startbtn">continue?</a>
+        </div>
+        <div id="content">
+            <div class="bg">
+                <audio id="song" loop>
+                    <source src="resources/the front - quas.mp3" type="audio/mpeg">
+                  </audio>
+                  <video id="video" playsinline preload muted loop>
+                    <source src="resources/quas.mp4" type="video/mp4">
+                  </video>
+            </div>
+            <div class="main">
+                <h1>scot.wtf</h1>
+                <p><span class="typing">i am balling</span></p>
+                <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+                <script>
+                    var typed = new Typed('.typing', {
+                        strings: ['hi world.', '14 yr old developer', 'lua script maker', 'front-end developer', 'what does bolean mean?!/1', 'blame neil', 'i do ui :)', 'grafik designr'],
+                        typeSpeed: 60,
+                        backSpeed: 40,
+                        loop: true
+                    });
+                </script>
+            </div>
+            <div class="footer">
+                <a href="https://github.com/scotdotwtf">github</a>
+                <a href="https://twitter.com/specowos">twitter</a>
+                <a href="https://www.youtube.com/@scotdotwtf">youtube</a>
+            </div>
+        </div>
+        <script type="text/javascript" src="main.js"></script>
+    </body>
+</html>
