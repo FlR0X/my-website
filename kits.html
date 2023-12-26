@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BV2M's Kit List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333; /* Dark Gray */
+            margin: 20px;
+            color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+        }
+
+        .kit-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .kit-item {
+            flex: 0 0 calc(33.333% - 10px);
+            margin: 5px;
+            padding: 20px;
+            background-color: #add8e6; /* Light Blue */
+            color: #000; /* Black text for better visibility */
+            cursor: pointer;
+            border-radius: 10px;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+
+        .kit-item:hover {
+            background-color: #87ceeb; /* Slightly darker shade of Light Blue */
+        }
+
+        #search-input {
+            margin: 10px 0;
+            padding: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <h1>BV2M's Kit List</h1>
+    
+    <input type="text" id="search-input" placeholder="Search for a kit..." oninput="filterKits()">
+    
+    <div class="kit-list" id="kitList">
+        <!-- Kit items will be dynamically added here -->
+    </div>
+
+    <script>
+        function copyToClipboard(kitName) {
+            const command = `&kit ${kitName.toLowerCase()}`;
+            navigator.clipboard.writeText(command).catch(function(err) {
+                console.error('Unable to copy to clipboard', err);
+            });
+        }
+
+        function filterKits() {
+            const searchInput = document.getElementById('search-input').value.toLowerCase();
+            const kitList = document.getElementById('kitList');
+            const kitItems = kitList.getElementsByClassName('kit-item');
+
+            for (const kitItem of kitItems) {
+                const kitName = kitItem.getAttribute('data-kit-name');
+                if (kitName.toLowerCase().includes(searchInput)) {
+                    kitItem.style.display = 'block';
+                } else {
+                    kitItem.style.display = 'none';
+                }
+            }
+        }
+
+        const kits = [
+            'trees', 'sponge', 'obsidian', 'nether', 'light', 'dyes', 'quartz', 'gappels',
+            'xp', 'grass', 'totems', 'maps', 'stone', 'dupe', 'banners', 'tinyhouse', 'travel',
+            'storage', 'firework_maker', 'efly', 'crystals', 'redstone', 'redstone-only', 'slime',
+            'glass', 'liquids', 'music', 'ores', 'grief', 'wool', 'sand', 'survival', 'farming',
+            'brewing', 'rails', 'black-concrete', 'pink-concrete', 'magenta-concrete', 'gray-concrete',
+            'yellow-concrete', 'purple-concrete', 'light_gray-concrete', 'orange-concrete', 'lime-concrete',
+            'white-concrete', 'red-concrete', 'green-concrete', 'blue-concrete', 'brown-concrete',
+            'light_blue-concrete', 'cyan-concrete', 'pearls', 'boxbox', 'hoppers', 'ice', 'snow',
+            'autograph', 'newpvp', 'general', 'refill', 'mobs', 'portal', 'glazed', 'cobwebs',
+            'echests', 'enchanting', 'eggs', 'milk', 'beds', 'cobblestone', 'mushroom', 'leaves',
+            'end', 'prismarine', 'random'
+        ];
+
+        const kitListElement = document.getElementById('kitList');
+
+        kits.forEach(kit => {
+            const kitItem = document.createElement('div');
+            kitItem.className = 'kit-item';
+            kitItem.textContent = kit.charAt(0).toUpperCase() + kit.slice(1);
+            kitItem.setAttribute('data-kit-name', kit);
+            kitItem.onclick = function() {
+                copyToClipboard(kit);
+            };
+            kitListElement.appendChild(kitItem);
+        });
+    </script>
+</body>
+</html>
