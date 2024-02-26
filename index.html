@@ -1,8 +1,3 @@
-<meta property="og:image" content="https://cdn.discordapp.com/attachments/1203456393634381895/1211737896659451924/710132864d55b26c57f4a059cf1976f9.jpg">
-<meta content="hi, i like cats and ibuprofen" property="og:description" />
-<meta content="https://firox.xyz/" property="og:url" />
-<meta content="#004481" data-react-helmet="true" name="theme-color" 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,13 +56,17 @@
       margin-bottom: 10px;
     }
 
-    input {
-      background-color: black;
-      border: 1px solid pink;
-      color: pink;
-      padding: 8px;
-      margin-right: 10px;
-      font-size: 1px;
+    .button-container {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .button {
+      color: #ffc0cb;
+      cursor: pointer;
+      text-decoration: underline;
+      font-size: 16px;
     }
   </style>
 </head>
@@ -93,11 +92,15 @@
   <audio id="backgroundMusic" autoplay loop volume="0.1">
     <source src="pain.mp3" type="audio/mp3">
     Your browser does not support the audio tag.
-</audio>
+  </audio>
 
+  <div class="button-container">
+    <div class="button" onclick="window.location.href='https://youtube.com/@firox1337'">YouTube</div>
+    <div class="button" onclick="window.location.href='https://github.com/Firoxus'">GitHub</div>
+    <div class="button" onclick="window.location.href='https://discord.gg/enigma'">Discord</div>
+  </div>
 
   <script>
-    
     const quoteText = document.getElementById("quoteText");
     const quotes = [
       "If the most important people in this world cheat, why should I not?",
