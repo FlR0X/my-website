@@ -1,54 +1,166 @@
-<meta property="og:image" content="https://cdn.discordapp.com/attachments/1101906871432007712/1104530160226685069/wsfw.png">
-<meta content="Firox" property="og:title" />
-<meta content="Cats r cool" property="og:description" />
+<meta property="og:image" content="https://cdn.discordapp.com/attachments/1203456393634381895/1211737896659451924/710132864d55b26c57f4a059cf1976f9.jpg">
+<meta content="hi, i like cats and ibuprofen" property="og:description" />
 <meta content="https://firox.xyz/" property="og:url" />
 <meta content="#004481" data-react-helmet="true" name="theme-color" 
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>$ firox.xyz $</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css" media="screen">
-    <link rel="shortcut icon" href="/resources/fav.png" type="image/x-icon">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>F</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: #ffc0cb;
+      font-family: 'Consolas', monospace;
+      overflow: hidden;
+    }
+
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('background.jpg') center/cover no-repeat;
+      filter: blur(8px);
+      z-index: -1;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+      z-index: -1;
+    }
+
+    h1 {
+      font-size: 15px;
+      text-shadow: 0 0 10px #ffc0cb, 0 0 20px #ffc0cb, 0 0 30px #ff1493;
+      white-space: pre;
+      margin: 0;
+      font-family: inherit; /* Use the default font */
+    }
+
+    #quoteContainer {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    #quoteText {
+      font-size: 13.5px;
+      margin-bottom: 10px;
+    }
+
+    input {
+      background-color: black;
+      border: 1px solid pink;
+      color: pink;
+      padding: 8px;
+      margin-right: 10px;
+      font-size: 1px;
+    }
+  </style>
 </head>
 <body>
-    <div id="start">
-        <a onclick="start()" class="startbtn">click me.</a>
-    </div>
-    <div id="content">
-        <div class="bg">
-            <video id="background-video" autoplay muted loop>
-                <source src="bonezmc.mp4" type="video/mp4">
-            </video>
-            <audio id="song" loop>
-                <source src="resources/the front - quas.mp3" type="audio/mpeg">
-            </audio>
-        </div>
-        <div class="main">
-            <h1>Firox</h1>
-            <p><span class="typing"></span></p>
-            <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-            <script>
-                var typed = new Typed('.typing', {
-                    strings: ['‟The most important people in this world cheat, so why should I not?„', '‟Haben ist Besser als Brauchen„'],
-                    typeSpeed: 60,
-                    backSpeed: 50,
-                    loop: false
-                });
-            </script>
-        </div>
-        <div class="footer">
-            <a href="https://github.com/Firoxus">Github</a>
-            <a href="https://cdn.discordapp.com/attachments/914893992133529671/1105543851315318945/firox.cf.lua">| Pandora Lua |</a>
-            <a href="https://www.youtube.com/@FiroxLovesYou">Youtube</a>
-        </div>
-    </div>
-    <script type="text/javascript" src="main.js"></script>
+  <div class="background"></div>
+  <div class="overlay"></div>
+
+  <h1>
+    /$$$$$$$$ /$$                              
+    | $$_____/|__/                              
+    | $$       /$$  /$$$$$$   /$$$$$$  /$$   /$$
+    | $$$$$   | $$ /$$__  $$ /$$__  $$|  $$ /$$/
+    | $$__/   | $$| $$  \__/| $$  \ $$ \  $$$$/ 
+    | $$      | $$| $$      | $$  | $$  >$$  $$ 
+    | $$      | $$| $$      |  $$$$$$/ /$$/\  $$
+    |__/      |__/|__/       \______/ |__/  \__/
+  </h1>
+
+  <div id="quoteContainer">
+    <p id="quoteText"></p>
+  </div>
+
+  <audio id="backgroundMusic" autoplay loop volume="0.1">
+    <source src="pain.mp3" type="audio/mp3">
+    Your browser does not support the audio tag.
+</audio>
+
+
+  <script>
+    
+    const quoteText = document.getElementById("quoteText");
+    const quotes = [
+      "If the most important people in this world cheat, why should I not?",
+      "HvH Is life",
+      "Hi :3",
+      "Im 1337",
+      "Pro Coder 1337 (i paste)",
+    ];
+    const quotes2 = [
+      "F",
+      "Fi",
+      "Fir",
+      "Firo",
+      "Firox",
+      "Firo",
+      "Fir",
+      "Fi",
+    ];
+
+    let titleIndex = 0;
+    let quoteIndex = 0;
+
+    function animateQuote(index) {
+      const text = quotes[index];
+      const delay = 60;
+      let charIndex = 0;
+
+      function writeCharacter() {
+        if (charIndex <= text.length) {
+          quoteText.textContent = text.substring(0, charIndex);
+          charIndex++;
+          setTimeout(writeCharacter, delay);
+        } else {
+          setTimeout(() => eraseQuote(index), delay * 2);
+        }
+      }
+
+      function eraseQuote() {
+        if (charIndex >= 0) {
+          quoteText.textContent = text.substring(0, charIndex);
+          charIndex--;
+          setTimeout(eraseQuote, delay);
+        } else {
+          setTimeout(() => animateQuote((index + 1) % quotes.length), delay);
+        }
+      }
+
+      writeCharacter();
+    }
+
+    function updateTitle() {
+      document.title = quotes2[titleIndex];
+      titleIndex = (titleIndex + 1) % quotes2.length;
+      setTimeout(updateTitle, 500); // Change title every 500 milliseconds
+    }
+
+    function updateQuote() {
+      animateQuote(quoteIndex);
+      quoteIndex = (quoteIndex + 1) % quotes.length;
+    }
+
+    updateTitle();
+    updateQuote();
+  </script>
 </body>
 </html>
