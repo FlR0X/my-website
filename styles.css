@@ -1,0 +1,98 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: Consolas, monospace;
+}
+
+#overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    transition: opacity 0.5s;
+}
+
+#overlay-text {
+    color: white;
+    font-size: 2em;
+}
+
+#content {
+    display: none;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: black;
+}
+
+#background-video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(8px);
+}
+
+#main-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+}
+
+#quote {
+    margin-top: 20px;
+}
+
+#links {
+    margin-top: 20px;
+}
+
+#links a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    position: relative;
+}
+
+#links a::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+#links a:hover::after {
+    opacity: 1;
+}
+
+#notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    display: none;
+    transition: opacity 0.5s;
+    box-shadow: 0 0 10px white;
+    text-align: center;
+    font-size: 1em;
+}

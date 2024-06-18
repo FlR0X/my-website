@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const discordLink = document.getElementById('discord-link');
     const backgroundMusic = document.getElementById('background-music');
 
+    backgroundMusic.loop = true; // Make the song loop
+
     const quotes = [
         "' If the most important people in this world cheat, why shouldn't I? '",
         "' Alone 4 Ever '",
@@ -17,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "' Lass mich bitte einfach inruhe. '"
     ];
     let quoteIndex = 0;
-
+    
     overlay.addEventListener('click', () => {
         backgroundMusic.volume = 0.05;
         backgroundMusic.play();
@@ -81,7 +83,9 @@ document.addEventListener('DOMContentLoaded', function() {
         let glitchIndex = 0;
 
         function updateText() {
-            mainTextElement.firstChild.textContent = glitchVariants[glitchIndex];
+            const text = glitchVariants[glitchIndex];
+            mainTextElement.firstChild.textContent = text;
+            document.title = text; // Update the title with the glitched text
             glitchIndex = (glitchIndex + 1) % glitchVariants.length;
             setTimeout(updateText, 300); // Adjust the timing for the glitch effect
         }
