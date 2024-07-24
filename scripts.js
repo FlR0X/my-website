@@ -13,10 +13,9 @@ document.addEventListener('DOMContentLoaded', function() {
         "' If the most important people in this world cheat, why shouldn't I? '",
         "' Alone 4 Ever '",
         "' AntiSocial 4 Lyfe '",
-        "' Ich will nichts damit zu tun haben. '",
+        "' Paster '",
         "' Firox 4 Ever. '",
-        "' Professional Fraudstar. '",
-        "' Lass mich bitte einfach inruhe. '"
+        "' Professional Fraudstar. '"
     ];
     let quoteIndex = 0;
     
@@ -63,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     discordLink.addEventListener('click', (e) => {
         e.preventDefault();
-        navigator.clipboard.writeText('firoxsalt').then(() => {
+        navigator.clipboard.writeText('gworld.').then(() => {
             notification.style.display = 'block';
             setTimeout(() => {
                 notification.style.opacity = '1';
