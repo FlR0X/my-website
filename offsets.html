@@ -38,6 +38,28 @@
         .button:hover {
             background: #555;
         }
+        .box {
+            display: none;
+            margin: 20px auto;
+            padding: 5px 15px; /* Adjust padding for height */
+            border: 2px solid #d7aaff;
+            border-radius: 10px;
+            max-width: 406px; /* Adjust width */
+            background: #222;
+            color: #d7aaff;
+            box-shadow: 0 0 15px #d7aaff; /* Glowing effect */
+            text-align: left; /* Align text to left */
+            box-sizing: border-box; /* Include border and padding in element's total width and height */
+            white-space: pre-wrap; /* Preserve whitespace and line breaks */
+            word-break: break-word; /* Ensure long words are broken properly */
+        }
+        .box-content {
+            font-size: 17px; /* Font size for content */
+            line-height: 1.5; /* Adjust line height for readability */
+        }
+        .show {
+            display: block;
+        }
         #returnButton {
             display: none; /* Initially hidden */
         }
@@ -54,23 +76,67 @@
         <a href="#" class="button" id="robloxButton">Roblox</a>
         <a href="#" class="button" id="fortniteButton">Fortnite</a>
     </div>
+    <div id="robloxBox" class="box">
+        <pre id="robloxContent" class="box-content"></pre>
+    </div>
+    <div id="fortniteBox" class="box">
+        <pre id="fortniteContent" class="box-content"></pre>
+    </div>
 
     <script>
+        function loadContent(fileName, contentId, removeRegex, isFortnite) {
+            fetch(offsets/${fileName})
+                .then(response => response.text())
+                .then(data => {
+                    let processedData = data
+                        .replace(removeRegex, '') // Remove specified pattern
+                        .replace(/^\s+/gm, '') // Remove leading whitespace from each line
+                        .replace(/"/g, '') // Remove quotation marks
+                        .replace(/:/g, ' = ') // Replace colons with equals and add space
+                        .replace(/;/g, '') // Remove semicolons
+                        .replace(/,/g, '') // Remove commas
+                        .trim(); // Trim leading and trailing whitespace
+
+                    // Additional processing for Fortnite content
+                    if (isFortnite) {
+                        processedData = processedData
+                            .replace(/\n/g, '<br>') // Replace newlines with <br> for HTML rendering
+                            .replace(/^\s+|\s+$/g, '') // Remove leading and trailing whitespace
+                            .replace(/  /g, ' ') // Replace double spaces with a single space
+                            .replace(/^\s+/gm, ''); // Remove leading whitespace from each line
+                    } else {
+                        // Replace newlines with <br> for HTML rendering
+                        processedData = processedData
+                            .replace(/\n/g, '<br>')
+                            .replace(/^\s+|\s+$/g, ''); // Remove leading and trailing whitespace
+                    }
+
+                    document.getElementById(contentId).innerHTML = processedData;
+                })
+                .catch(error => console.error('Error loading content:', error));
+        }
+
         document.getElementById('robloxButton').addEventListener('click', function() {
-            const downloadLink = document.createElement('a');
-            downloadLink.href = 'offsets/roblox.txt';
-            downloadLink.download = 'roblox.txt';
-            downloadLink.click();
+            document.getElementById('robloxBox').classList.add('show');
+            document.getElementById('fortniteBox').classList.remove('show');
+            document.getElementById('robloxButton').style.display = 'none';
+            document.getElementById('fortniteButton').style.display = 'none';
+            document.getElementById('returnButton').style.display = 'inline-block';
+            loadContent('roblox.txt', 'robloxContent', /constexpr std::uint32_t\s+/g, false);
         });
 
         document.getElementById('fortniteButton').addEventListener('click', function() {
-            const downloadLink = document.createElement('a');
-            downloadLink.href = 'offsets/fortnite.txt';
-            downloadLink.download = 'fortnite.txt';
-            downloadLink.click();
+            document.getElementById('fortniteBox').classList.add('show');
+            document.getElementById('robloxBox').classList.remove('show');
+            document.getElementById('fortniteButton').style.display = 'none';
+            document.getElementById('robloxButton').style.display = 'none';
+            document.getElementById('returnButton').style.display = 'inline-block';
+            loadContent('fortnite.txt', 'fortniteContent', /uintptr_t\s+/g, true);
         });
 
         document.getElementById('returnButton').addEventListener('click', function() {
+            document.getElementById('robloxBox').classList.remove('show');
+            document.getElementById('fortniteBox').classList.remove('show');
             document.getElementById('robloxButton').style.display = 'inline-block';
             document.getElementById('fortniteButton').style.display = 'inline-block';
             document.getElementById('returnButton').style.display = 'none';
