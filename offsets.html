@@ -44,30 +44,36 @@
             text-decoration: underline;
             cursor: pointer;
         }
+        .info-text {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 16px;
+            color: #d7aaff;
+        }
         .box {
             display: none;
             margin: 20px auto;
-            padding: 5px 15px; /* Adjust padding for height */
+            padding: 5px 15px;
             border: 2px solid #d7aaff;
             border-radius: 10px;
-            max-width: 406px; /* Adjust width */
+            max-width: 406px;
             background: #222;
             color: #d7aaff;
-            box-shadow: 0 0 15px #d7aaff; /* Glowing effect */
-            text-align: left; /* Align text to left */
-            box-sizing: border-box; /* Include border and padding in element's total width and height */
-            white-space: pre-wrap; /* Preserve whitespace and line breaks */
-            word-break: break-word; /* Ensure long words are broken properly */
+            box-shadow: 0 0 15px #d7aaff;
+            text-align: left;
+            box-sizing: border-box;
+            white-space: pre-wrap;
+            word-break: break-word;
         }
         .box-content {
-            font-size: 17px; /* Font size for content */
-            line-height: 1.5; /* Adjust line height for readability */
+            font-size: 17px;
+            line-height: 1.5;
         }
         .show {
             display: block;
         }
         #returnButton {
-            display: none; /* Initially hidden */
+            display: none;
         }
     </style>
 </head>
@@ -83,6 +89,9 @@
         <a href="#" class="button" id="robloxButton">Roblox</a>
         <a href="#" class="button" id="fortniteButton">Fortnite</a>
     </div>
+    <div class="info-text">
+        If an offset is missing it means it wasn't updated, you may use your old one.
+    </div>
     <div id="robloxBox" class="box">
         <pre id="robloxContent" class="box-content"></pre>
     </div>
@@ -96,26 +105,24 @@
                 .then(response => response.text())
                 .then(data => {
                     let processedData = data
-                        .replace(removeRegex, '') // Remove specified pattern
-                        .replace(/^\s+/gm, '') // Remove leading whitespace from each line
-                        .replace(/"/g, '') // Remove quotation marks
-                        .replace(/:/g, ' = ') // Replace colons with equals and add space
-                        .replace(/;/g, '') // Remove semicolons
-                        .replace(/,/g, '') // Remove commas
-                        .trim(); // Trim leading and trailing whitespace
+                        .replace(removeRegex, '')
+                        .replace(/^\s+/gm, '')
+                        .replace(/"/g, '')
+                        .replace(/:/g, ' = ')
+                        .replace(/;/g, '')
+                        .replace(/,/g, '')
+                        .trim();
 
-                    // Additional processing for Fortnite content
                     if (isFortnite) {
                         processedData = processedData
-                            .replace(/\n/g, '<br>') // Replace newlines with <br> for HTML rendering
-                            .replace(/^\s+|\s+$/g, '') // Remove leading and trailing whitespace
-                            .replace(/  /g, ' ') // Replace double spaces with a single space
-                            .replace(/^\s+/gm, ''); // Remove leading whitespace from each line
+                            .replace(/\n/g, '<br>')
+                            .replace(/^\s+|\s+$/g, '')
+                            .replace(/  /g, ' ')
+                            .replace(/^\s+/gm, '');
                     } else {
-                        // Replace newlines with <br> for HTML rendering
                         processedData = processedData
                             .replace(/\n/g, '<br>')
-                            .replace(/^\s+|\s+$/g, ''); // Remove leading and trailing whitespace
+                            .replace(/^\s+|\s+$/g, '');
                     }
 
                     document.getElementById(contentId).innerHTML = processedData;
