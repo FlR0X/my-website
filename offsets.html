@@ -85,7 +85,7 @@
 
     <script>
         function loadContent(fileName, contentId, removeRegex, isFortnite) {
-            fetch(offsets/${fileName})
+            fetch(`offsets/${fileName}`)
                 .then(response => response.text())
                 .then(data => {
                     let processedData = data
