@@ -38,6 +38,12 @@
         .button:hover {
             background: #555;
         }
+        .download-link {
+            display: none;
+            color: #d7aaff;
+            text-decoration: underline;
+            cursor: pointer;
+        }
         .box {
             display: none;
             margin: 20px auto;
@@ -70,6 +76,7 @@
         <div class="glow-text">Offsets @ firox.xyz</div>
         <div class="button-container">
             <a href="#" class="button" id="returnButton">Return to Dashboard</a>
+            <a href="#" class="download-link" id="downloadLink">Download Offsets (.txt)</a>
         </div>
     </header>
     <div class="button-container">
@@ -122,6 +129,9 @@
             document.getElementById('robloxButton').style.display = 'none';
             document.getElementById('fortniteButton').style.display = 'none';
             document.getElementById('returnButton').style.display = 'inline-block';
+            document.getElementById('downloadLink').style.display = 'inline-block';
+            document.getElementById('downloadLink').setAttribute('href', 'offsets/roblox.txt');
+            document.getElementById('downloadLink').setAttribute('download', 'roblox.txt');
             loadContent('roblox.txt', 'robloxContent', /constexpr std::uint32_t\s+/g, false);
         });
 
@@ -131,6 +141,9 @@
             document.getElementById('fortniteButton').style.display = 'none';
             document.getElementById('robloxButton').style.display = 'none';
             document.getElementById('returnButton').style.display = 'inline-block';
+            document.getElementById('downloadLink').style.display = 'inline-block';
+            document.getElementById('downloadLink').setAttribute('href', 'offsets/fortnite.txt');
+            document.getElementById('downloadLink').setAttribute('download', 'fortnite.txt');
             loadContent('fortnite.txt', 'fortniteContent', /uintptr_t\s+/g, true);
         });
 
@@ -140,6 +153,7 @@
             document.getElementById('robloxButton').style.display = 'inline-block';
             document.getElementById('fortniteButton').style.display = 'inline-block';
             document.getElementById('returnButton').style.display = 'none';
+            document.getElementById('downloadLink').style.display = 'none';
         });
     </script>
 </body>
