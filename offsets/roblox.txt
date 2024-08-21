@@ -58,3 +58,4 @@ constexpr std::uint32_t Value = 0xc0;
 constexpr std::uint32_t TextLabelColor3 = 0x6e8;
 constexpr std::uint32_t TextLabelText = 0x6a0;
 constexpr std::uint32_t Adornee = 0xc0;
+constexpr std::uint32_t Print = 0x1120950;
