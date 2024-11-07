@@ -11,9 +11,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const quotes = [
         "' If the most important people in this world cheat, why shouldn't I? '",
-        "' I Love you Mia '",
         "' AntiSocial 4 Lyfe '",
         "' Paster '",
+        "' I Love you Mia '",
         "' Firox 4 Ever. '",
         "' Non Proffesional Fraudstar. '"
     ];
