@@ -11,11 +11,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const quotes = [
         "' If the most important people in this world cheat, why shouldn't I? '",
-        "' Alone 4 Ever '",
+        "' I Love you Mia '",
         "' AntiSocial 4 Lyfe '",
         "' Paster '",
         "' Firox 4 Ever. '",
-        "' Professional Fraudstar. '"
+        "' Non Proffesional Fraudstar. '"
     ];
     let quoteIndex = 0;
     
