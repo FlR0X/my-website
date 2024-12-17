@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "' If the most important people in this world cheat, why shouldn't I? '",
         "' AntiSocial 4 Lyfe '",
         "' Paster '",
-        "' I Love you Mia '",
+        "' SetWindowsHookEx Abuser '",
         "' Firox 4 Ever. '",
         "' Non Proffesional Fraudstar. '"
     ];
