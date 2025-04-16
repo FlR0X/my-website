@@ -7,15 +7,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const discordLink = document.getElementById('discord-link');
     const backgroundMusic = document.getElementById('background-music');
 
-    backgroundMusic.loop = true; // Make the song loop
+    backgroundMusic.loop = true; 
 
     const quotes = [
         "' If the most important people in this world cheat, why shouldn't I? '",
-        "' AntiSocial 4 Lyfe '",
+        "' AntiSocial 4 Life '",
         "' Paster '",
-        "' SetWindowsHookEx Abuser '",
-        "' Firox 4 Ever. '",
-        "' Non Proffesional Fraudstar. '"
+        "' Uc Warrior '",
+        "' SetWindowsHook Abuser '",
+        "' Firox 4 Ever '",
+        "' Meow '"
     ];
     let quoteIndex = 0;
     
@@ -31,8 +32,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function typeQuote() {
         const quote = quotes[quoteIndex];
-        let charIndex = 1;  // Start with the second character since first is always shown
-        quoteElement.innerHTML = quote.charAt(0); // Initialize with the first character
+        let charIndex = 1; 
+        quoteElement.innerHTML = quote.charAt(0); 
 
         function typeChar() {
             if (charIndex < quote.length) {
@@ -45,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         function deleteQuote() {
-            if (charIndex > 1) { // Ensure at least the first character is kept
+            if (charIndex > 1) { 
                 quoteElement.innerHTML = quoteElement.innerHTML.slice(0, -1);
                 charIndex--;
                 setTimeout(deleteQuote, 50);
@@ -84,9 +85,9 @@ document.addEventListener('DOMContentLoaded', function() {
         function updateText() {
             const text = glitchVariants[glitchIndex];
             mainTextElement.firstChild.textContent = text;
-            document.title = text; // Update the title with the glitched text
+            document.title = text; 
             glitchIndex = (glitchIndex + 1) % glitchVariants.length;
-            setTimeout(updateText, 300); // Adjust the timing for the glitch effect
+            setTimeout(updateText, 300);
         }
 
         updateText();
