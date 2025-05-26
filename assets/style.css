@@ -1,0 +1,168 @@
+body 
+{
+    margin: 0;
+    padding: 0;
+    background-color: rgb(10,10,11);
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+
+.container_main
+{
+    visibility: hidden;
+    background-color: rgba(0,0,0,0);
+    width: 300px;
+    height: 175px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.container_init
+{
+    background-color: rgba(0,0,0,0);
+    width: 300px;
+    height: 175px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.container_main ul
+{
+    color: rgb(255,255,255);
+    list-style: none;
+    padding: 5px;
+    margin-top: 5px;
+    text-align: center;
+    user-select: none;
+}
+
+.container_main a[href] 
+{
+    color: #fff;
+    text-decoration: none;
+    font-family: monospace;
+    font-size: 13px;
+    padding: 5px;
+    user-select: none;
+}
+
+.container_main a[href]:hover
+{
+    color: rgb(255, 185, 255);
+    text-decoration: underline;
+    font-family: monospace;
+    font-size: 13px;
+    padding: 5px;
+}
+
+.container_main img
+{
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+
+    position: relative;
+    user-select: none;
+}
+
+.title, .title:link, .title:active, .title:visited
+{
+    color: rgb(255, 185, 255) !important;
+    font-family: monospace;
+    font-style: normal;
+    font-size: 17px;
+    text-shadow: 0 0 8px #ffb9ff;
+    user-select: none;
+}
+
+.box 
+{
+    background: rgb(8,8,8);
+    width: 300px;
+    height: 175px;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(255, 185, 255);
+    background-color: rgb(8,8,13);
+}
+
+.box h1
+{
+    color: rgb(255, 185, 255);
+    font-family: monospace;
+    font-style: normal;
+    font-weight: 5;
+    font-size: 15px;
+}
+
+.box input[type="text"], .box input[type="password"], .box input[type="submit"]
+{
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(255, 185, 255);
+    background-color: rgb(15,15,15);
+    font-family: monospace;
+    font-style: normal;
+    font-weight: lighter;
+    text-align: center;
+    color:#fff;
+    display: block;
+    margin: 10px auto;
+    width: 200px;
+    box-sizing: border-box;
+}
+
+.box input[type="text"]:focus, .box input[type="password"]:focus
+{
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(255, 185, 255);
+    background-color: rgb(15,15,15);
+    font-family: monospace;
+    font-style: normal;
+    font-weight: lighter;
+    text-align: center;
+    color:#fff;
+    display: block;
+    margin: 10px auto;
+    width: 200px;
+    outline-width: 0;
+    box-sizing: border-box;
+}
+
+
+@keyframes title-glow 
+{
+    from {
+        text-shadow: 0 0 15px #ffb9ff;
+    }
+    to {
+        text-shadow: 0 0 8px #ffb9ff;
+    }
+} 

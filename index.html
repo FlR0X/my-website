@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+    
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+        <title>firox.lol - come back soon!</title>
+        <link rel="shortcut icon" type="image/x-icon" href="assets/astolfo_pink.png"/>
+        <link rel="stylesheet" href="assets/style.css"/>
+        <meta content="firox.lol" property="og:title"/>
+        <meta content="professional pasting" property="og:description"/>
+        <meta content="https://firox.lol/" property="og:url"/>
+        <meta content="assets/astolfo_pink.png" property="og:image"/>
+        <meta content="#ffb9ff" data-react-helmet="true" name="theme-color"/>
+    </head>
+
+    <body>
+        <div id="particles-js"></div>
+        <script src="assets/particles/particles.js"></script>
+        <script src="assets/particles/app.js"></script>
+        <script src="assets/rythm.js"></script>
+        <audio loop src="assets/song.mp3" id="audio"></audio>
+
+        <script>
+            var has_init = false
+            var audio = document.getElementById("audio"); audio.volume = 0.1;
+            
+            
+            particlesJS('particles-js', {
+                "particles": {
+                  "number": {
+                    "value": 80,
+                    "density": {
+                      "enable": true,
+                      "value_area": 800
+                    }
+                  },
+                  "color": {
+                    "value": "#ffb9ff"
+                  },
+                  "shape": {
+                    "type": "line",
+                    "stroke": {
+                      "width": 0,
+                      "color": "#ffb9ff"
+                    },
+                    "polygon": {
+                      "nb_sides": 5
+                    },
+                    "image": {
+                      "src": "img/github.svg",
+                      "width": 100,
+                      "height": 100
+                    }
+                  },
+                  "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                      "enable": false,
+                      "speed": 1,
+                      "opacity_min": 0.1,
+                      "sync": false
+                    }
+                  },
+                  "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                      "enable": false,
+                      "speed": 40,
+                      "size_min": 0.1,
+                      "sync": false
+                    }
+                  },
+                  "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffb9ff",
+                    "opacity": 0.4,
+                    "width": 1
+                  },
+                  "move": {
+                    "enable": true,
+                    "speed": 6,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                      "enable": false,
+                      "rotateX": 600,
+                      "rotateY": 1200
+                    }
+                  }
+                },
+                "interactivity": {
+                  "detect_on": "canvas",
+                  "events": {
+                    "onhover": {
+                      "enable": true,
+                      "mode": "repulse"
+                    },
+                    "onclick": {
+                      "enable": true,
+                      "mode": "push"
+                    },
+                    "resize": true
+                  },
+                  "modes": {
+                    "grab": {
+                      "distance": 400,
+                      "line_linked": {
+                        "opacity": 1
+                      }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                      },
+                      "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                      },
+                      "push": {
+                        "particles_nb": 4
+                      },
+                      "remove": {
+                        "particles_nb": 2
+                      }
+                    }
+                  },
+                  "retina_detect": true
+                });
+
+            function audio_init() {
+                if (has_init) return
+                audio.play().then(() => {
+                    var rythm = new Rythm()
+                    rythm.addRythm('img', 'image-shadow', 0, 10)
+                    rythm.addRythm('title', 'text-shadow', 0, 10)
+                    rythm.addRythm('text', 'text-shadow', 0, 10)
+                    rythm.connectExternalAudioElement(audio)
+                    rythm.start()
+                    document.getElementsByClassName('container_main')[0].style.visibility = 'visible'
+                    document.getElementsByClassName('container_init')[0].style.visibility = 'hidden'
+                    has_init = true
+                    console.log('initalized')
+                })
+            }
+
+            audio_init()
+            window.onclick = () => {
+                audio_init()
+            }
+
+            document.addEventListener('contextmenu', event => event.preventDefault())
+            
+        </script>
+        
+
+<div class="container_init">
+    <a class=""></a><br>
+    <a class=""></a><br>
+    <a class=""></a><br>
+    <a class=""></a><br>
+    <a class=""></a><br>
+    <a class=""></a><br>
+    <a class=""></a><br>
+    
+    <a class="title">click anywhere to enter...</a>
+</div>
+
+        <div class="container_main">
+            <img class='img' src="assets/astolfo_pink.png">
+            <a class="title">firox.lol</a>
+            <ul>
+                [
+                <a class="text" href="javascript:void(0)" onclick="navigator.clipboard.writeText('gworld.')">discord</a>
+                <a class="text">|</a>
+                <a class="text" href="https://t.me/ficock" target="_blank">telegram</a>
+                <a class="text">|</a>
+                <a class="text" href="https://github.com/flr0x" target="_blank">github</a>
+                ]
+            </ul>
+            <ul>
+                <a class="text" href="now/welcome" target="_blank">--> @saqqwd aka now post (click) <--</a>
+            </ul>
+        </div>
+    </body>
+
+</html>
+
