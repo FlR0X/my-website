@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>pastel · IG peek</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0b0b0b;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'SF Mono', 'Menlo', 'Monaco', 'Cascadia Code', 'Consolas', 'Courier New', monospace;
+      padding: 1.2rem;
+      margin: 0;
+    }
+
+    .console_window {
+      background: #1e1e1e; 
+      border: 1.5px solid #ffb3c6;
+      border-radius: 20px;
+      padding: 2rem 2rem 2.2rem;
+      max-width: 640px;
+      width: 100%;
+      box-shadow: 0 16px 40px rgba(255, 179, 198, 0.12), 0 0 0 1px rgba(255, 200, 220, 0.1) inset;
+      backdrop-filter: blur(2px);
+      transition: box-shadow 0.2s;
+    }
+
+    .console_prompt {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+      color: #ffb3c6;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      font-size: 1.3rem;
+      border-bottom: 1px dashed #3a2c32;
+      padding-bottom: 16px;
+    }
+
+    .prompt_symbol {
+      color: #ffb3c6;
+      font-weight: 600;
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .input_wrapper {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      background: #0f0f0f;
+      border-radius: 40px;
+      padding: 2px 6px 2px 16px;
+      border: 1px solid #ffb3c6;
+      transition: all 0.15s;
+    }
+    .input_wrapper:focus-within {
+      border-color: #ff99aa;
+      box-shadow: 0 0 0 3px rgba(255, 179, 198, 0.2);
+    }
+
+    .at_sign {
+      color: #ffb3c6;
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin-right: 4px;
+    }
+
+    #ig_username_input {
+      background: transparent;
+      border: none;
+      padding: 14px 8px 14px 0;
+      color: #f8e3e9;
+      font-family: inherit;
+      font-size: 1.1rem;
+      width: 100%;
+      outline: none;
+      letter-spacing: 0.3px;
+    }
+
+    #ig_username_input::placeholder {
+      color: #6b4b57;
+      font-style: italic;
+      font-size: 0.95rem;
+    }
+
+    #fetch_btn {
+      background: #ffb3c6;
+      border: none;
+      border-radius: 40px;
+      padding: 10px 20px;
+      margin-left: 10px;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #0b0b0b;
+      cursor: pointer;
+      border: 1px solid #ffb3c6;
+      transition: 0.15s;
+      white-space: nowrap;
+      letter-spacing: 0.3px;
+      box-shadow: 0 2px 6px rgba(255, 150, 180, 0.2);
+    }
+
+    #fetch_btn:hover {
+      background: #ff9eb0;
+      border-color: #ff9eb0;
+      color: #000;
+      transform: scale(0.97);
+    }
+
+    #fetch_btn:disabled {
+      opacity: 0.6;
+      background: #5a414b;
+      border-color: #7a5a66;
+      color: #1e1e1e;
+      pointer-events: none;
+      box-shadow: none;
+    }
+
+    .profile_panel {
+      display: none; 
+      margin-top: 8px;
+    }
+
+    .profile_top_row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 22px;
+      background: #141414;
+      padding: 12px 16px;
+      border-radius: 28px;
+      border-left: 6px solid #ffb3c6;
+    }
+
+    .avatar_square {
+      width: 74px;
+      height: 74px;
+      border-radius: 18px;  
+      border: 2px solid #ffb3c6;
+      background: #2a1e22;
+      object-fit: cover;
+      background-color: #1f181b;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+    }
+
+    .name_section {
+      flex: 1;
+    }
+
+    .display_name {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: #ffd9e2;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      word-break: break-word;
+    }
+
+    .real_username {
+      font-size: 1.1rem;
+      color: #ffb3c6;
+      opacity: 0.9;
+      margin-top: 4px;
+      font-family: monospace;
+      background: #0f0f0f;
+      display: inline-block;
+      padding: 2px 12px;
+      border-radius: 30px;
+      border: 0.5px solid #ffb3c6;
+    }
+
+    .bio_content {
+      color: #ddc0ca;
+      font-size: 1.05rem;
+      line-height: 1.5;
+      padding: 14px 18px;
+      background: #151515;
+      border-radius: 22px;
+      margin-bottom: 28px;
+      border: 1px solid #3a2e33;
+      word-break: break-word;
+      border-left: 3px solid #ffb3c6;
+      font-style: normal;
+    }
+
+    .stats_grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .stat_card {
+      background: #111111;
+      border-radius: 18px;
+      padding: 16px 4px;
+      text-align: center;
+      border: 1px solid #3d2e34;
+      transition: 0.1s ease;
+      border-bottom: 3px solid #ffb3c6;
+    }
+
+    .stat_label {
+      color: #b39ca6;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    .stat_value {
+      color: #ffe2ec;
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .extra_info_row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      background: #0c0c0c;
+      border-radius: 20px;
+      padding: 16px 22px;
+      margin-top: 12px;
+      border: 1px dashed #ffb3c6;
+      justify-content: space-around;
+    }
+
+    .extra_item {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      color: #ffd0dc;
+      font-size: 1.1rem;
+    }
+
+    .extra_badge {
+      background: #ffb3c6;
+      color: #0b0b0b;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-right: 6px;
+    }
+
+    .extra_value {
+      font-family: monospace;
+      color: #f0cfdb;
+      font-weight: 600;
+    }
+
+    .status_line {
+      margin-top: 16px;
+      min-height: 24px;
+      color: #c9a6b3;
+      font-size: 0.9rem;
+      padding-left: 8px;
+      font-style: italic;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #ffb3c6;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      display: inline-block;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .no_bio_placeholder {
+      color: #8a6f7c;
+    }
+
+    @media (max-width: 500px) {
+      .console_window { padding: 1.5rem; }
+      .display_name { font-size: 1.5rem; }
+      .stats_grid { gap: 8px; }
+      .stat_value { font-size: 1.6rem; }
+      .console_prompt { flex-wrap: wrap; }
+      #fetch_btn { padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+<div class="console_window">
+  <div class="console_prompt">
+    <span class="prompt_symbol">></span>
+    <div class="input_wrapper">
+      <span class="at_sign">@</span>
+      <input type="text" id="ig_username_input" placeholder="username" autocomplete="off" spellcheck="false" autofocus>
+    </div>
+    <button id="fetch_btn">fetch</button>
+  </div>
+
+  <div id="profile_panel" class="profile_panel">
+    <div class="profile_top_row">
+      <img id="profile_avatar" class="avatar_square" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' fill='%2323181c'/%3E%3Ctext x='50%25' y='55%25' font-size='36' fill='%23ffb3c6' text-anchor='middle' font-family='monospace'%3E📷%3C/text%3E%3C/svg%3E" alt="profile" crossorigin="anonymous">
+      <div class="name_section">
+        <div id="display_name_el" class="display_name">—</div>
+        <div id="real_username_el" class="real_username">@loading</div>
+      </div>
+    </div>
+
+    <div id="bio_content" class="bio_content">—</div>
+
+    <div class="stats_grid">
+      <div class="stat_card">
+        <div class="stat_label">posts</div>
+        <div class="stat_value" id="posts_count">—</div>
+      </div>
+      <div class="stat_card">
+        <div class="stat_label">followers</div>
+        <div class="stat_value" id="followers_count">—</div>
+      </div>
+      <div class="stat_card">
+        <div class="stat_label">following</div>
+        <div class="stat_value" id="following_count">—</div>
+      </div>
+    </div>
+
+    <div class="extra_info_row">
+      <div class="extra_item"><span class="extra_badge">✓</span> verified: <span id="verified_badge" class="extra_value">—</span></div>
+      <div class="extra_item"><span class="extra_badge">🔒</span> private: <span id="private_badge" class="extra_value">—</span></div>
+      <div class="extra_item"><span class="extra_badge">🌐</span> website: <span id="website_link" class="extra_value">—</span></div>
+      <div class="extra_item"><span class="extra_badge">🆔</span> id: <span id="user_id_el" class="extra_value">—</span></div>
+    </div>
+  </div>
+
+  <div id="status_area" class="status_line">
+    <span id="status_text">ready · enter @username</span>
+  </div>
+</div>
+
+<script type="module">
+  const CORS_PROXY = 'https://api.allorigins.win/raw?url=';  
+  const INSTAGRAM_BASE = 'https://www.instagram.com/';
+
+  const input_el = document.getElementById('ig_username_input');
+  const fetch_btn = document.getElementById('fetch_btn');
+  const profile_panel = document.getElementById('profile_panel');
+  const status_text = document.getElementById('status_text');
+
+  const avatar_img = document.getElementById('profile_avatar');
+  const display_name_el = document.getElementById('display_name_el');
+  const real_username_el = document.getElementById('real_username_el');
+  const bio_content = document.getElementById('bio_content');
+  const posts_count = document.getElementById('posts_count');
+  const followers_count = document.getElementById('followers_count');
+  const following_count = document.getElementById('following_count');
+  const verified_badge = document.getElementById('verified_badge');
+  const private_badge = document.getElementById('private_badge');
+  const website_link = document.getElementById('website_link');
+  const user_id_el = document.getElementById('user_id_el');
+
+  let current_abort_controller = null;
+
+  function set_loading_state(is_loading) {
+    fetch_btn.disabled = is_loading;
+    if (is_loading) {
+      status_text.innerHTML = `<span class="spinner"></span> fetching @${input_el.value.trim() || '...'}`;
+    }
+  }
+
+  function set_error_state(message) {
+    status_text.innerHTML = `⚠️ ${message}`;
+    profile_panel.style.display = 'none';
+    fetch_btn.disabled = false;
+  }
+
+  function set_success_state() {
+    status_text.innerHTML = `✅ profile loaded · @${input_el.value.trim()}`;
+    profile_panel.style.display = 'block';
+    fetch_btn.disabled = false;
+  }
+
+  function format_number(num) {
+    if (num === undefined || num === null) return '—';
+    if (num >= 1_000_000) return (num / 1_000_000).toFixed(1) + 'M';
+    if (num >= 1_000) return (num / 1_000).toFixed(1) + 'K';
+    return num.toString();
+  }
+
+  async function fetch_instagram_profile(username) {
+    if (current_abort_controller) {
+      current_abort_controller.abort();
+    }
+    current_abort_controller = new AbortController();
+    const signal = current_abort_controller.signal;
+
+    const trimmed_username = username.trim().replace(/^@/, '');
+    if (!trimmed_username) {
+      set_error_state('enter a username');
+      return;
+    }
+
+    set_loading_state(true);
+    profile_panel.style.display = 'none';
+
+    const target_url = INSTAGRAM_BASE + encodeURIComponent(trimmed_username) + '/';
+    const proxy_url = CORS_PROXY + encodeURIComponent(target_url);
+
+    try {
+      const response = await fetch(proxy_url, { 
+        signal,
+        headers: { 'Accept': 'text/html' }
+      });
+
+      if (!response.ok) {
+        throw new Error(`http ${response.status}`);
+      }
+
+      const html_text = await response.text();
+
+      const shared_data_match = html_text.match(/window\._sharedData\s*=\s*({.*?});\s*<\/script>/s);
+      if (!shared_data_match) {
+        throw new Error('sharedData not found');
+      }
+
+      const shared_data_json = shared_data_match[1];
+      const shared_data = JSON.parse(shared_data_json);
+
+      const entry_data = shared_data?.entry_data;
+      if (!entry_data) throw new Error('missing entry_data');
+
+      const profile_page = entry_data?.ProfilePage?.[0];
+      if (!profile_page) throw new Error('profile not found / private?');
+
+      const graphql = profile_page?.graphql;
+      const user = graphql?.user;
+      if (!user) throw new Error('user data missing');
+
+      const user_id = user.id;
+      const full_name = user.full_name || '';
+      const username_from_data = user.username;
+      const biography = user.biography || '';
+      const edge_followed_by = user.edge_followed_by?.count ?? 0;
+      const edge_follow = user.edge_follow?.count ?? 0;
+      const edge_owner_to_timeline_media = user.edge_owner_to_timeline_media?.count ?? 0;
+      const is_verified = user.is_verified || false;
+      const is_private = user.is_private || false;
+      const external_url = user.external_url || null;
+      const profile_pic_url_hd = user.profile_pic_url_hd || user.profile_pic_url || '';
+
+      if (profile_pic_url_hd) {
+        avatar_img.src = profile_pic_url_hd;
+        avatar_img.alt = `@${username_from_data}`;
+      } else {
+        avatar_img.src = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'80\' height=\'80\' viewBox=\'0 0 80 80\'%3E%3Crect width=\'80\' height=\'80\' fill=\'%2323181c\'/%3E%3Ctext x=\'50%25\' y=\'55%25\' font-size=\'36\' fill=\'%23ffb3c6\' text-anchor=\'middle\' font-family=\'monospace\'%3E📷%3C/text%3E%3C/svg%3E';
+      }
+
+      display_name_el.textContent = full_name || username_from_data;
+      real_username_el.textContent = `@${username_from_data}`;
+      
+      bio_content.textContent = biography || '— no bio —';
+      if (!biography) bio_content.classList.add('no_bio_placeholder');
+      else bio_content.classList.remove('no_bio_placeholder');
+
+      posts_count.textContent = format_number(edge_owner_to_timeline_media);
+      followers_count.textContent = format_number(edge_followed_by);
+      following_count.textContent = format_number(edge_follow);
+
+      verified_badge.textContent = is_verified ? '✓ yes' : '✗ no';
+      private_badge.textContent = is_private ? '🔒 yes' : '🌐 no';
+      
+      if (external_url) {
+        let display_url = external_url.replace(/^https?:\/\//, '');
+        if (display_url.length > 30) display_url = display_url.substring(0, 28) + '…';
+        website_link.textContent = display_url;
+        website_link.title = external_url;
+      } else {
+        website_link.textContent = '—';
+        website_link.removeAttribute('title');
+      }
+      
+      user_id_el.textContent = user_id || '—';
+
+      set_success_state();
+
+    } catch (err) {
+      if (err.name === 'AbortError') {
+        status_text.innerHTML = `ready · enter @username`;
+        fetch_btn.disabled = false;
+      } else {
+        console.warn(err);
+        set_error_state(`error: ${err.message.includes('sharedData') ? 'unable to read profile' : err.message}`);
+      }
+    } finally {
+      current_abort_controller = null;
+      if (!fetch_btn.disabled) {
+      }
+    }
+  }
+
+  fetch_btn.addEventListener('click', () => {
+    fetch_instagram_profile(input_el.value);
+  });
+
+  input_el.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      fetch_btn.click();
+    }
+  });
+
+  input_el.addEventListener('input', () => {
+    if (input_el.value.trim() === '') {
+      // idle state
+    }
+  });
+
+  window.addEventListener('load', () => {
+    input_el.focus();
+  });
+
+  window.addEventListener('beforeunload', () => {
+    if (current_abort_controller) current_abort_controller.abort();
+  });
+
+
+</script>
+</body>
+</html>
