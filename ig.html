@@ -314,7 +314,7 @@
     <span class="prompt_symbol">></span>
     <div class="input_wrapper">
       <span class="at_sign">@</span>
-      <input type="text" id="ig_username_input" placeholder="username" autocomplete="off" spellcheck="false" autofocus>
+      <input type="text" id="ig_username_input" placeholder="username" autocomplete="off" spellcheck="false">
     </div>
     <button id="fetch_btn">fetch</button>
   </div>
@@ -359,7 +359,8 @@
 </div>
 
 <script type="module">
-  const CORS_PROXY = 'https://api.allorigins.win/raw?url=';  
+  // ---------- RELIABLE CORS PROXY (no keys) ----------
+  const CORS_PROXY = 'https://corsproxy.io/?';   // stable, passes headers
   const INSTAGRAM_BASE = 'https://www.instagram.com/';
 
   const input_el = document.getElementById('ig_username_input');
@@ -424,12 +425,18 @@
     profile_panel.style.display = 'none';
 
     const target_url = INSTAGRAM_BASE + encodeURIComponent(trimmed_username) + '/';
+    // Using corsproxy.io – it automatically adds proper CORS headers
     const proxy_url = CORS_PROXY + encodeURIComponent(target_url);
 
     try {
       const response = await fetch(proxy_url, { 
         signal,
-        headers: { 'Accept': 'text/html' }
+        headers: {
+          // Mimic a real browser to avoid Instagram blocking
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+          'Accept-Language': 'en-US,en;q=0.5',
+        }
       });
 
       if (!response.ok) {
@@ -438,9 +445,10 @@
 
       const html_text = await response.text();
 
+      // extract window._sharedData
       const shared_data_match = html_text.match(/window\._sharedData\s*=\s*({.*?});\s*<\/script>/s);
       if (!shared_data_match) {
-        throw new Error('sharedData not found');
+        throw new Error('sharedData not found (page may require login)');
       }
 
       const shared_data_json = shared_data_match[1];
@@ -509,12 +517,13 @@
         fetch_btn.disabled = false;
       } else {
         console.warn(err);
-        set_error_state(`error: ${err.message.includes('sharedData') ? 'unable to read profile' : err.message}`);
+        let error_msg = err.message;
+        if (error_msg.includes('sharedData')) error_msg = 'unable to read profile (login wall)';
+        else if (error_msg.includes('Failed to fetch')) error_msg = 'network/proxy error – try again';
+        set_error_state(`error: ${error_msg}`);
       }
     } finally {
       current_abort_controller = null;
-      if (!fetch_btn.disabled) {
-      }
     }
   }
 
@@ -529,12 +538,6 @@
     }
   });
 
-  input_el.addEventListener('input', () => {
-    if (input_el.value.trim() === '') {
-      // idle state
-    }
-  });
-
   window.addEventListener('load', () => {
     input_el.focus();
   });
@@ -542,8 +545,6 @@
   window.addEventListener('beforeunload', () => {
     if (current_abort_controller) current_abort_controller.abort();
   });
-
-
 </script>
 </body>
 </html>
