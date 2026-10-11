@@ -1,3 +1,0 @@
-bap
-pixi
-admin
