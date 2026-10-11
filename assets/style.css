@@ -313,14 +313,18 @@ body::after {
 
 .links .badge {
     position: relative;
-    top: 2px;
+    top: 0;
+    display: inline-flex;
+    align-items: center;
     font-size: 0.6rem;
+    line-height: 1;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--pink);
     border: 1px solid var(--line);
     border-radius: 999px;
-    padding: 1px 6px;
+    padding: 0 6px;
+    height: 15px;
     opacity: 0.8;
 }
 
