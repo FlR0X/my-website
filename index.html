@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>firox.dev</title>
+
+    <meta name="description" content="firox.dev — links and contact." />
+    <meta name="theme-color" content="#0a0a0b" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="referrer" content="no-referrer" />
+
+    <link rel="icon" type="image/gif" href="assets/favicon.gif" sizes="64x64" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" sizes="64x64" />
+    <link rel="apple-touch-icon" href="assets/astolfo_pink.png" />
+    <link rel="mask-icon" href="assets/favicon.png" color="#ffb9ff" />
+    <link rel="stylesheet" href="assets/style.css" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="firox.dev" />
+    <meta property="og:description" content="firox.dev — links and contact." />
+    <meta property="og:url" content="https://firox.dev/" />
+    <meta property="og:image" content="https://firox.dev/assets/astolfo_pink.png" />
+    <meta name="twitter:card" content="summary" />
+</head>
+
+<body>
+    <canvas id="bg" aria-hidden="true"></canvas>
+
+    <main class="shell">
+        <div class="card">
+            <div class="avatar_wrap">
+                <span class="avatar_glow" aria-hidden="true"></span>
+                <img class="avatar" src="assets/astolfo_pink.png" alt="" width="132" height="132" />
+            </div>
+
+            <div class="head">
+                <h1 class="title">firox.dev</h1>
+                <p class="tagline">
+                    <span class="dot">//</span> <span class="rotator" id="rotator"></span><span
+                        class="caret" aria-hidden="true"></span>
+                </p>
+            </div>
+
+            <ul class="links">
+                <li><a href="https://t.me/iFirox" target="_blank" rel="noopener noreferrer">telegram</a></li>
+                <li><a href="https://github.com/Flr0x" target="_blank" rel="noopener noreferrer">github</a></li>
+                <li><a href="https://e-z.bio/ioctl" target="_blank" rel="noopener noreferrer">more socials</a></li>
+                <li><a href="#" id="copy" data-copy="gworld.">discord user <span class="badge">copy</span></a></li>
+            </ul>
+
+            <section class="guild" id="guild" aria-label="source.market discord server">
+                <div class="guild_row">
+                    <div class="guild_left">
+                        <img class="guild_icon" id="guild_icon" alt="" width="72" height="72" draggable="false" />
+                        <div class="guild_names">
+                            <h1 class="guild_name" id="guild_name">source.market</h1>
+                            <p class="guild_stat">
+                                <span class="guild_dot online" aria-hidden="true"></span>
+                                <span id="guild_online">-- Online</span>
+                            </p>
+                            <p class="guild_stat">
+                                <span class="guild_dot idle" aria-hidden="true"></span>
+                                <span id="guild_members">-- Members</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <a class="guild_join" id="guild_join" href="https://discord.gg/pqbYNMDCm8"
+                        target="_blank" rel="noopener noreferrer">
+                        <span>Join Server</span>
+                        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true">
+                            <path fill="currentColor" fill-rule="evenodd"
+                                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
+                        </svg>
+                    </a>
+                </div>
+            </section>
+
+            
+        </div>
+    </main>
+
+    <div class="player" id="player">
+        <div class="art">
+            <img id="cover" src="assets/songs/Pashanim - Florenz.jpg" alt="" width="62" height="62" />
+        </div>
+
+        <div class="player_body">
+            <div class="player_meta">
+                <div class="player_names">
+                    <span class="artist" id="artist">Pashanim</span>
+                    <span class="song" id="song">Florenz</span>
+                </div>
+
+                <div class="player_vol">
+                    <button class="vol_mute" id="mute" type="button" aria-label="mute" title="mute">
+                        <svg class="ico ico_vol" viewBox="0 0 24 24" aria-hidden="true">
+                            <polygon class="ico_glyph" points="11 4 6.5 8.5 2.5 8.5 2.5 15.5 6.5 15.5 11 20 11 4"></polygon>
+                            <path class="wave" d="M15.2 8.9a4.2 4.2 0 0 1 0 6.2"></path>
+                            <path class="wave" d="M18.1 6a8.4 8.4 0 0 1 0 12"></path>
+                        </svg>
+                        <svg class="ico ico_mute" viewBox="0 0 24 24" aria-hidden="true">
+                            <polygon class="ico_glyph" points="11 4 6.5 8.5 2.5 8.5 2.5 15.5 6.5 15.5 11 20 11 4"></polygon>
+                            <line class="wave" x1="16" y1="9.5" x2="21.5" y2="14.5"></line>
+                            <line class="wave" x1="21.5" y1="9.5" x2="16" y2="14.5"></line>
+                        </svg>
+                    </button>
+
+                    <input id="vol_range" type="range" min="0" max="100" value="12" aria-label="volume" />
+                </div>
+            </div>
+
+            <div class="seek" id="seek" role="slider" tabindex="0" aria-label="seek"
+                aria-valuemin="0" aria-valuemax="0" aria-valuenow="0">
+                <canvas class="wave" id="wave"></canvas>
+                <div class="times">
+                    <span id="time_now">0:00</span>
+                    <span id="time_end">0:00</span>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="ctrl" id="back" type="button" aria-label="previous track" title="previous track">
+                    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+                        <polygon class="ico_glyph" points="19 20 9 12 19 4 19 20"></polygon>
+                        <line x1="5" y1="19" x2="5" y2="5"></line>
+                    </svg>
+                </button>
+
+                <button class="ctrl primary" id="play" type="button" aria-label="play" title="play">
+                    <svg class="ico ico_play" viewBox="0 0 24 24" aria-hidden="true">
+                        <polygon class="ico_glyph" points="6 3 20 12 6 21 6 3"></polygon>
+                    </svg>
+                    <svg class="ico ico_pause" viewBox="0 0 24 24" aria-hidden="true">
+                        <rect class="ico_glyph" x="5" y="3" width="4.5" height="18"></rect>
+                        <rect class="ico_glyph" x="14.5" y="3" width="4.5" height="18"></rect>
+                    </svg>
+                </button>
+
+                <button class="ctrl" id="fwd" type="button" aria-label="next track" title="next track">
+                    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+                        <polygon class="ico_glyph" points="5 4 15 12 5 20 5 4"></polygon>
+                        <line x1="19" y1="5" x2="19" y2="19"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="vol" id="vol"></div>
+    </div>
+
+    <button class="gate" id="gate" type="button" aria-label="enter site and start music">
+        <span class="gate_text">click anywhere to enter...</span>
+    </button>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <audio id="audio" preload="metadata"></audio>
+
+    <script>
+        (() => {
+            "use strict";
+
+            const pink = "255,185,255";
+            const link_dist = 132;
+            const pointer_dist = 190;
+            const reduce_motion = matchMedia("(prefers-reduced-motion: reduce)");
+
+            const canvas = document.getElementById("bg");
+            const ctx = canvas.getContext("2d", { alpha: true });
+
+            let view_w = 0;
+            let view_h = 0;
+            let ratio = 1;
+            let parts = [];
+            let resize_timer = 0;
+            let level = 0;
+            const max_parts = 90;
+
+            const pointer = { x: -9999, y: -9999, active: false };
+
+            function base_count() {
+                return Math.max(22, Math.min(max_parts, Math.round((view_w * view_h) / 26000)));
+            }
+
+            function seed() {
+                if (reduce_motion.matches) {
+                    parts = [];
+                    return;
+                }
+
+                const count = base_count();
+                const cols = Math.ceil(Math.sqrt(count * (view_w / view_h)));
+                const rows = Math.ceil(count / cols);
+                const cell_w = view_w / cols;
+                const cell_h = view_h / rows;
+
+                parts = Array.from({ length: count }, (_, i) => {
+                    const p = make_part();
+                    const col = i % cols;
+                    const row = Math.floor(i / cols) % rows;
+
+                    p.x = (col + 0.5 + (Math.random() - 0.5) * 0.9) * cell_w;
+                    p.y = (row + 0.5 + (Math.random() - 0.5) * 0.9) * cell_h;
+
+                    return p;
+                });
+            }
+
+            function make_part() {
+                const bvx = (Math.random() - 0.5) * 0.55;
+                const bvy = (Math.random() - 0.5) * 0.55;
+
+                return {
+                    x: Math.random() * view_w,
+                    y: Math.random() * view_h,
+                    bvx: bvx,
+                    bvy: bvy,
+                    vx: bvx,
+                    vy: bvy,
+                    r: 0.6 + Math.random() * 1.5,
+                    phase: Math.random() * 6.2831853,
+                    spin: (0.0015 + Math.random() * 0.004) * (Math.random() < 0.5 ? -1 : 1),
+                };
+            }
+
+            function resize() {
+                ratio = Math.min(window.devicePixelRatio || 1, 2);
+                view_w = window.innerWidth;
+                view_h = window.innerHeight;
+                canvas.width = Math.round(view_w * ratio);
+                canvas.height = Math.round(view_h * ratio);
+                ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+                seed();
+            }
+
+            function schedule_resize() {
+                clearTimeout(resize_timer);
+                resize_timer = setTimeout(resize, 120);
+            }
+
+            function edge_fade(x, y) {
+                const margin = 10;
+                const dx = Math.min(x, view_w - x);
+                const dy = Math.min(y, view_h - y);
+                const near = Math.min(dx, dy);
+
+                if (near >= margin) return 1;
+                if (near <= 0) return 0;
+
+                const t = near / margin;
+                return t * t * (3 - 2 * t);
+            }
+
+            function step() {
+                ctx.clearRect(0, 0, view_w, view_h);
+
+                const beat = level * level * (3 - 2 * level);
+                const reach = link_dist * (1 + beat * 0.55);
+                const reach_sq = reach * reach;
+                const dot_alpha = 0.42 + beat * 0.5;
+                const line_boost = 0.22 + beat * 0.42;
+                const mid_x = view_w / 2;
+                const mid_y = view_h / 2;
+
+                for (let i = 0; i < parts.length; i++) {
+                    const p = parts[i];
+
+                    if (p.burst) {
+                        p.r += 0.045;
+                        if (p.r > 4.2) p.burst = 0;
+                    }
+
+                    if (!reduce_motion.matches) {
+                        p.vx = p.bvx * (1 + beat * 1.6);
+                        p.vy = p.bvy * (1 + beat * 1.6);
+                        p.x += p.vx;
+                        p.y += p.vy;
+
+                        if (beat > 0.002) {
+                            const bx = p.x - mid_x;
+                            const by = p.y - mid_y;
+                            const bd = Math.hypot(bx, by);
+
+                            if (bd > 0.01) {
+                                const sway = Math.min(beat * 0.22, 0.3);
+                                const wobble = (p.phase + p.spin) % 6.2831853;
+                                p.x += ((bx / bd) * sway * Math.cos(wobble) - (by / bd) * sway * Math.sin(wobble));
+                                p.y += ((by / bd) * sway * Math.cos(wobble) + (bx / bd) * sway * Math.sin(wobble));
+                            }
+                        }
+
+                        if (p.x < 0 || p.x > view_w || p.y < 0 || p.y > view_h) {
+                            p.x = Math.random() * view_w;
+                            p.y = Math.random() * view_h;
+                        }
+
+                        if (pointer.active) {
+                            const dx = p.x - pointer.x;
+                            const dy = p.y - pointer.y;
+                            const d = Math.hypot(dx, dy);
+
+                            if (d < pointer_dist) {
+                                const near = 1 - d / pointer_dist;
+                                const f = near * near * 7;
+
+                                if (d > 0.01) {
+                                    p.x += (dx / d) * f;
+                                    p.y += (dy / d) * f;
+                                } else {
+                                    p.x += (Math.random() - 0.5) * f;
+                                    p.y += (Math.random() - 0.5) * f;
+                                }
+
+                                p.scared = 0.22;
+                            } else {
+                                p.scared = 0;
+                            }
+                        } else {
+                            p.scared = 0;
+                        }
+                    }
+
+                    const fade = edge_fade(p.x, p.y);
+                    const boost = p.scared ? 1 + p.scared * 2.6 : 1;
+
+                    if (fade > 0.004) {
+                        const size = p.r * (1 + beat * 1.1) * (p.scared ? 1 + p.scared : 1);
+
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
+                        ctx.fillStyle = "rgba(" + pink + "," + Math.min(1, dot_alpha * fade * boost).toFixed(3) + ")";
+                        ctx.fill();
+                    }
+
+                    for (let j = i + 1; j < parts.length; j++) {
+                        const q = parts[j];
+                        const dx = p.x - q.x;
+                        const dy = p.y - q.y;
+                        const d2 = dx * dx + dy * dy;
+
+                        if (d2 < reach_sq) {
+                            const pair = Math.min(fade, edge_fade(q.x, q.y));
+
+                            if (pair > 0.004) {
+                                const a = (1 - Math.sqrt(d2) / reach) * line_boost * pair;
+                                ctx.beginPath();
+                                ctx.moveTo(p.x, p.y);
+                                ctx.lineTo(q.x, q.y);
+                                ctx.strokeStyle = "rgba(" + pink + "," + a.toFixed(3) + ")";
+                                ctx.lineWidth = 1;
+                                ctx.stroke();
+                            }
+                        }
+
+                        if (p.scared && !q.scared) {
+                            const bx = q.x - p.x;
+                            const by = q.y - p.y;
+                            const bd = Math.hypot(bx, by);
+
+                            if (bd > 0.01 && bd < reach * 0.62) {
+                                const pull = (1 - bd / (reach * 0.62)) * p.scared * 0.9;
+                                q.x += (bx / bd) * pull;
+                                q.y += (by / bd) * pull;
+                            }
+                        }
+                    }
+                }
+
+                requestAnimationFrame(step);
+            }
+
+            function move_pointer(e) {
+                const t = e.touches ? e.touches[0] : e;
+                if (!t) return;
+                pointer.x = t.clientX;
+                pointer.y = t.clientY;
+                pointer.active = true;
+            }
+
+            function pop_particle(x, y) {
+                if (reduce_motion.matches) return;
+
+                const p = make_part();
+                p.x = x;
+                p.y = y;
+                p.r = 1.1 + Math.random() * 0.9;
+                p.burst = 1;
+
+                parts.push(p);
+
+                while (parts.length > max_parts) parts.shift();
+                trim_parts();
+            }
+
+            function on_press(e) {
+                move_pointer(e);
+
+                if (e.target.closest(".links, .player, .toast, button, a, input")) return;
+                pop_particle(pointer.x, pointer.y);
+            }
+
+            addEventListener("pointermove", move_pointer, { passive: true });
+            addEventListener("pointerdown", on_press, { passive: true });
+            addEventListener("blur", () => (pointer.active = false));
+            addEventListener("resize", schedule_resize);
+
+            if (window.visualViewport) {
+                visualViewport.addEventListener("resize", schedule_resize);
+            }
+
+            resize();
+            requestAnimationFrame(step);
+
+            const page_title = "firox.dev";
+            const page_loaded = Date.now();
+            let title_timer = 0;
+
+            function run_title() {
+                const full = page_title;
+                const frames = [];
+                let at = 0;
+
+                for (let i = 1; i <= full.length; i++) frames.push(full.slice(0, i));
+                for (let i = full.length - 1; i >= 1; i--) frames.push(full.slice(0, i));
+
+                const dwell = [190, 105, 82, 68, 62, 78, 66, 58];
+
+                let frame_at = 0;
+
+                const tick = () => {
+                    if (frame_at < frames.length) {
+                        document.title = frames[frame_at];
+
+                        const at_full = frame_at === full.length - 1;
+                        const at_min = frame_at === full.length;
+                        const step = frame_at % dwell.length;
+
+                        frame_at++;
+                        title_timer = setTimeout(
+                            tick,
+                            at_full ? 1650 : at_min ? 520 : dwell[step] + Math.random() * 90
+                        );
+                        return;
+                    }
+
+                    frame_at = 0;
+                    title_timer = setTimeout(tick, 520);
+                };
+
+                tick();
+            }
+
+            const rotator = document.getElementById("rotator");
+            const lines = [
+                "probably building something",
+                "smoking loud",
+                "sleep is optional",
+                "definitely running it up",
+                "shipping at 3am",
+                "professional pasta chef",
+            ];
+
+            let line_at = 0;
+            let char_at = 0;
+            let erasing = false;
+            let typing_timer = 0;
+
+            function type_line() {
+                const line = lines[line_at];
+
+                if (!erasing) {
+                    char_at++;
+                    rotator.textContent = line.slice(0, char_at);
+
+                    if (char_at >= line.length) {
+                        erasing = true;
+                        typing_timer = setTimeout(type_line, 1900);
+                        return;
+                    }
+
+                    typing_timer = setTimeout(type_line, 42 + Math.random() * 62);
+                    return;
+                }
+
+                char_at--;
+                rotator.textContent = line.slice(0, char_at);
+
+                if (char_at <= 0) {
+                    erasing = false;
+                    line_at = (line_at + 1) % lines.length;
+                    typing_timer = setTimeout(type_line, 420);
+                    return;
+                }
+
+                typing_timer = setTimeout(type_line, 20);
+            }
+
+            if (reduce_motion.matches) {
+                rotator.textContent = lines[0];
+            } else {
+                type_line();
+                run_title();
+                document.addEventListener("visibilitychange", () => {
+                    clearTimeout(typing_timer);
+                    clearTimeout(title_timer);
+                    if (document.hidden) return;
+                    type_line();
+                    run_title();
+                });
+            }
+
+            const toast_el = document.getElementById("toast");
+            let toast_timer = 0;
+            function toast(message) {
+                toast_el.textContent = message;
+                toast_el.classList.add("show");
+                clearTimeout(toast_timer);
+                toast_timer = setTimeout(() => toast_el.classList.remove("show"), 1800);
+            }
+
+            async function copy_text(text) {
+                try {
+                    if (navigator.clipboard && window.isSecureContext) {
+                        await navigator.clipboard.writeText(text);
+                        return true;
+                    }
+                } catch (err) {}
+
+                try {
+                    const field = document.createElement("textarea");
+                    field.value = text;
+                    field.setAttribute("readonly", "");
+                    field.style.cssText = "position:fixed;top:0;left:0;opacity:0;pointer-events:none";
+                    document.body.appendChild(field);
+                    field.select();
+                    field.setSelectionRange(0, text.length);
+                    const done = document.execCommand("copy");
+                    document.body.removeChild(field);
+                    return done;
+                } catch (err) {
+                    return false;
+                }
+            }
+
+            const copy_btn = document.getElementById("copy");
+
+            copy_btn.addEventListener("click", async (e) => {
+                e.preventDefault();
+                const value = copy_btn.dataset.copy;
+                toast((await copy_text(value)) ? "copied " + value : value);
+            });
+
+            const audio = document.getElementById("audio");
+            const root = document.documentElement;
+
+            const player = document.getElementById("player");
+            const cover = document.getElementById("cover");
+            const artist_el = document.getElementById("artist");
+            const song_el = document.getElementById("song");
+            const play_btn = document.getElementById("play");
+            const back_btn = document.getElementById("back");
+            const fwd_btn = document.getElementById("fwd");
+            const mute_btn = document.getElementById("mute");
+            const vol_box = document.getElementById("vol");
+            const vol_range = document.getElementById("vol_range");
+            const seek = document.getElementById("seek");
+            const wave = document.getElementById("wave");
+            const wave_ctx = wave.getContext("2d");
+            const time_now = document.getElementById("time_now");
+            const time_end = document.getElementById("time_end");
+
+            const songs = [
+                { artist: "Pashanim", title: "Florenz", file: "assets/songs/Pashanim - Florenz.mp3", cover: "assets/songs/Pashanim - Florenz.jpg" },
+                { artist: "Pashanim", title: "Mittelmeer", file: "assets/songs/Pashanim - Mittelmeer.mp3", cover: "assets/songs/Pashanim - Mittelmeer.jpg" },
+                { artist: "Pashanim", title: "Ms. Jackson", file: "assets/songs/Pashanim - Ms. Jackson.mp3", cover: "assets/songs/Pashanim - Ms. Jackson.jpg" },
+                { artist: "Pashanim", title: "Tr\u00e4ume", file: "assets/songs/Pashanim - Tr\u00e4ume.mp3", cover: "assets/songs/Pashanim - Traeume.jpg" },
+            ];
+
+            let song_at = 0;
+            let played = [];
+
+            function pick_song() {
+                if (songs.length < 2) return 0;
+
+                let next = song_at;
+
+                while (next === song_at || played.includes(next)) {
+                    next = Math.floor(Math.random() * songs.length);
+                }
+
+                played.push(next);
+
+                if (played.length >= songs.length) {
+                    played = [next];
+                }
+
+                return next;
+            }
+
+            audio.volume = 0.12;
+            if (location.protocol !== "file:") audio.crossOrigin = "anonymous";
+
+            let audio_ctx = null;
+            let analyser = null;
+            let bins = null;
+            let smooth = 0;
+            let peak = 0.02;
+            let meter_frame = 0;
+            let dragging = false;
+            let entered = false;
+            let loading_song = false;
+
+            function load_song(index, autoplay) {
+                song_at = (index + songs.length) % songs.length;
+                const song = songs[song_at];
+
+                loading_song = true;
+                cover.src = song.cover;
+                artist_el.textContent = song.artist;
+                song_el.textContent = song.title;
+                audio.src = song.file;
+                audio.currentTime = 0;
+                shape_seed = hash_seed(song.file);
+                shape_wave(shape_seed);
+                smooth_progress = 0;
+                sync();
+
+                if (autoplay) play_audio();
+            }
+
+            function format_time(seconds) {
+                if (!isFinite(seconds) || seconds < 0) return "0:00";
+                const whole = Math.floor(seconds);
+                const mins = Math.floor(whole / 60);
+                const secs = whole % 60;
+                return mins + ":" + String(secs).padStart(2, "0");
+            }
+
+            const wave_shape = [];
+            const wave_freq = [];
+            let wave_bars = 0;
+            let shape_seed = 1;
+            let wave_w = 0;
+            let wave_h = 0;
+
+            function hash_seed(text) {
+                let h = 2166136261;
+
+                for (let i = 0; i < text.length; i++) {
+                    h ^= text.charCodeAt(i);
+                    h = Math.imul(h, 16777619);
+                }
+
+                return h >>> 0;
+            }
+
+            function shape_wave(seed) {
+                let s = seed || 1;
+                const rand = () => {
+                    s ^= s << 13; s >>>= 0;
+                    s ^= s >> 17;
+                    s ^= s << 5; s >>>= 0;
+                    return s / 4294967296;
+                };
+
+                const pick = (a) => a[Math.floor(rand() * a.length)];
+
+                const sections = [];
+                let at = 0;
+
+                const push = (len, kind) => {
+                    sections.push({ start: at, end: at + len, kind: kind });
+                    at += len;
+                };
+
+                push(0.04 + rand() * 0.05, "silence");
+                push(0.07 + rand() * 0.05, "quiet");
+
+                let drops = 2 + Math.floor(rand() * 2);
+
+                while (at < 0.94 && drops > 0) {
+                    const verse = 0.06 + rand() * 0.07;
+                    push(verse, pick(["verse", "verse", "chill"]));
+
+                    const build = 0.03 + rand() * 0.04;
+                    push(build, "build");
+
+                    const drop = 0.09 + rand() * 0.1;
+                    push(drop, "drop");
+                    drops--;
+
+                    if (drops > 0 && rand() < 0.8) push(0.03 + rand() * 0.04, "break");
+                    if (drops > 0) push(0.05 + rand() * 0.05, pick(["verse", "chill"]));
+                }
+
+                if (at < 1) push(1 - at, "outro");
+
+                const energy = { silence: 0.05, quiet: 0.16, verse: 0.42, chill: 0.34, build: 0.6, drop: 1, break: 0.26, outro: 0.2 };
+                const beats = 46 + Math.floor(rand() * 26);
+                const phase = rand() * 6.2831853;
+
+                const at_t = (t) => {
+                    for (const g of sections) {
+                        if (t >= g.start && t < g.end) {
+                            const span = g.end - g.start;
+                            const local = span > 0 ? (t - g.start) / span : 0;
+                            let v = energy[g.kind];
+
+                            if (g.kind === "drop") {
+                                v *= 0.86 + 0.14 * Math.sin(local * Math.PI);
+                            } else if (g.kind === "build") {
+                                v *= 0.42 + 0.58 * local * local;
+                            } else if (g.kind === "silence") {
+                                v *= 0.5 + 0.5 * local;
+                            } else if (g.kind === "outro") {
+                                v *= 1 - local * 0.75;
+                            } else {
+                                v *= 0.88 + 0.12 * Math.sin(local * Math.PI * 2);
+                            }
+
+                            return Math.max(0.02, Math.min(1, v));
+                        }
+                    }
+                    return 0.1;
+                };
+
+                wave_shape.length = 0;
+                wave_freq.length = 0;
+
+                for (let i = 0; i < wave_bars; i++) {
+                    const t = (i + 0.5) / wave_bars;
+                    const base = at_t(t);
+
+                    const beat_pos = (t * beats) % 1;
+                    const transient = Math.pow(1 - beat_pos, 2.6) * 0.34;
+                    const body = 0.76 + 0.24 * Math.sin(t * beats * 3.14159 + phase);
+                    const texture = 0.9 + 0.1 * Math.sin(t * 87.3 + phase * 3);
+
+                    const v = base * (body + transient * base) * texture;
+                    wave_shape.push(Math.max(0.025, Math.min(1, v)));
+
+                    const spread = Math.sqrt(Math.max(0, 1 - Math.abs(t - 0.5) * 2));
+                    wave_freq.push(Math.min(1, spread * (0.55 + 0.45 * Math.sin(t * 8.9 + phase))));
+                }
+            }
+
+            function build_wave() {
+                const box = wave.getBoundingClientRect();
+                const dpr_now = Math.min(window.devicePixelRatio || 1, 2);
+
+                wave_w = Math.max(1, Math.round(box.width));
+                wave_h = Math.max(1, Math.round(box.height));
+                wave.width = Math.round(wave_w * dpr_now);
+                wave.height = Math.round(wave_h * dpr_now);
+                wave_ctx.setTransform(dpr_now, 0, 0, dpr_now, 0, 0);
+
+                const gap = 2;
+                const next_bars = Math.max(12, Math.floor((wave_w + gap) / (3 + gap)));
+
+                if (next_bars !== wave_bars) {
+                    wave_bars = next_bars;
+                    shape_wave(shape_seed);
+                } else if (!wave_shape.length) {
+                    shape_wave(shape_seed);
+                }
+            }
+
+            function draw_wave() {
+                if (!wave_bars) return;
+
+                const total = isFinite(audio.duration) ? audio.duration : 0;
+                const now = audio.currentTime || 0;
+                const progress = total ? Math.min(1, now / total) : 0;
+                const rate = progress > smooth_progress ? 0.34 : 0.9;
+                smooth_progress += (progress - smooth_progress) * rate;
+                if (Math.abs(progress - smooth_progress) < 0.0004) smooth_progress = progress;
+                wave_ctx.clearRect(0, 0, wave_w, wave_h);
+
+                const mid = wave_h / 2;
+                const max_h = wave_h * 0.5;
+                const bar_w = Math.max(1.5, (wave_w - (wave_bars - 1) * 2) / wave_bars);
+                const edge = smooth_progress * wave_bars;
+
+                for (let i = 0; i < wave_bars; i++) {
+                    const h = Math.max(1.5, wave_shape[i] * max_h);
+                    const x = i * (bar_w + 2);
+                    const dist = edge - i;
+
+                    const fade = Math.max(0, Math.min(1, dist + 0.5));
+                    const a = 0.16 + 0.69 * fade;
+
+                    wave_ctx.fillStyle = "rgba(255,185,255," + a.toFixed(3) + ")";
+
+                    const bar_h = h * 2;
+                    wave_ctx.beginPath();
+                    wave_ctx.roundRect(x, mid - bar_h / 2, bar_w, bar_h, bar_w / 2);
+                    wave_ctx.fill();
+                }
+            }
+
+            let smooth_progress = 0;
+            let wave_frame = 0;
+
+            function loop_wave() {
+                draw_wave();
+                wave_frame = requestAnimationFrame(loop_wave);
+            }
+
+            function sync() {
+                const total = isFinite(audio.duration) ? audio.duration : 0;
+                const now = audio.currentTime || 0;
+
+                time_now.textContent = format_time(now);
+                time_end.textContent = format_time(total);
+
+                seek.setAttribute("aria-valuenow", String(Math.floor(now)));
+                seek.setAttribute("aria-valuemax", String(Math.floor(total)));
+
+                const playing = !audio.paused && !audio.ended;
+                player.classList.toggle("playing", playing);
+                player.classList.toggle("pulsing", playing && level > 0.04);
+                play_btn.setAttribute("aria-label", playing ? "pause" : "play");
+                play_btn.title = playing ? "pause" : "play";
+                mute_btn.setAttribute("aria-label", audio.muted ? "unmute" : "mute");
+                mute_btn.title = audio.muted ? "unmute" : "mute";
+                vol_box.classList.toggle("off", audio.muted || audio.volume === 0);
+                mute_btn.classList.toggle("off", audio.muted || audio.volume === 0);
+                vol_range.style.setProperty("--level", String(audio.muted ? 0 : Math.round(audio.volume * 100)));
+            }
+
+            function track_player() {
+                const box = player.getBoundingClientRect();
+                if (box.height) root.style.setProperty("--player_h", box.height.toFixed(1) + "px");
+            }
+
+            function meter() {
+                if (analyser && !document.hidden) {
+                    analyser.getByteTimeDomainData(bins);
+
+                    let sum = 0;
+                    for (let i = 0; i < bins.length; i++) {
+                        const v = (bins[i] - 128) / 128;
+                        sum += v * v;
+                    }
+
+                    const rms = Math.sqrt(sum / bins.length);
+                    peak = Math.max(rms, peak * 0.9993);
+                    const gain = Math.min(45, Math.max(3, 0.82 / Math.max(peak, 0.0005)));
+                    const level_now = Math.min(1, Math.pow(rms * gain, 0.72));
+                    smooth += (level_now - smooth) * (level_now > smooth ? 0.55 : 0.07);
+                } else {
+                    smooth += (0 - smooth) * 0.06;
+                }
+
+                level = smooth;
+                root.style.setProperty("--pulse", smooth.toFixed(3));
+                meter_frame = requestAnimationFrame(meter);
+            }
+
+            function start_audio() {
+                const audio_context_class = window.AudioContext || window.webkitAudioContext;
+                const can_analyse = location.protocol !== "file:";
+
+                if (can_analyse && audio_context_class && !audio_ctx) {
+                    audio_ctx = new audio_context_class();
+                    analyser = audio_ctx.createAnalyser();
+                    analyser.fftSize = 512;
+                    bins = new Uint8Array(analyser.fftSize);
+
+                    const source = audio_ctx.createMediaElementSource(audio);
+                    source.connect(analyser);
+                    analyser.connect(audio_ctx.destination);
+                }
+
+                if (audio_ctx && audio_ctx.state === "suspended") audio_ctx.resume();
+
+                return audio.play();
+            }
+
+            function play_audio() {
+                try {
+                    start_audio().then(
+                        () => {
+                            if (!meter_frame) meter_frame = requestAnimationFrame(meter);
+                        },
+                        () => toast("audio blocked by browser")
+                    );
+                } catch (err) {
+                    toast("audio blocked by browser");
+                }
+            }
+
+            function skip(seconds) {
+                const total = isFinite(audio.duration) ? audio.duration : 0;
+                const next = (audio.currentTime || 0) + seconds;
+                audio.currentTime = Math.max(0, total ? Math.min(total, next) : next);
+                sync();
+            }
+
+            function seek_to(e) {
+                const total = isFinite(audio.duration) ? audio.duration : 0;
+                if (!total) return;
+
+                const box = wave.getBoundingClientRect();
+                const ratio_x = (e.clientX - box.left) / box.width;
+                audio.currentTime = Math.max(0, Math.min(1, ratio_x)) * total;
+            }
+
+            play_btn.addEventListener("click", () => {
+                if (audio.paused) {
+                    play_audio();
+                } else {
+                    audio.pause();
+                }
+            });
+
+            back_btn.addEventListener("click", () => {
+                if ((audio.currentTime || 0) > 3) {
+                    audio.currentTime = 0;
+                    sync();
+                    return;
+                }
+                load_song(pick_song(), !audio.paused);
+            });
+
+            fwd_btn.addEventListener("click", () => load_song(pick_song(), !audio.paused));
+
+            mute_btn.addEventListener("click", () => {
+                audio.muted = !audio.muted;
+                if (!audio.muted && audio.volume === 0) audio.volume = 0.12;
+                vol_range.value = String(Math.round(audio.volume * 100));
+                sync();
+            });
+
+            vol_range.addEventListener("input", () => {
+                const value = Number(vol_range.value);
+                audio.volume = value / 100;
+                audio.muted = value === 0;
+                sync();
+            });
+
+            seek.addEventListener("pointerdown", (e) => {
+                dragging = true;
+                try {
+                    seek.setPointerCapture(e.pointerId);
+                } catch (err) {}
+                seek_to(e);
+                sync();
+            });
+
+            seek.addEventListener("pointermove", (e) => {
+                if (!dragging) return;
+                seek_to(e);
+                sync();
+            });
+
+            const end_drag = (e) => {
+                dragging = false;
+                try {
+                    seek.releasePointerCapture(e.pointerId);
+                } catch (err) {}
+            };
+
+            seek.addEventListener("pointerup", end_drag);
+            seek.addEventListener("pointercancel", end_drag);
+
+            seek.addEventListener("keydown", (e) => {
+                if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+                e.preventDefault();
+                skip(e.key === "ArrowLeft" ? -5 : 5);
+            });
+
+            for (const name of ["timeupdate", "durationchange", "loadedmetadata", "play", "pause", "ended", "volumechange"]) {
+                audio.addEventListener(name, sync);
+            }
+
+            audio.addEventListener("ended", () => load_song(pick_song(), true));
+
+            audio.addEventListener("error", () => {
+                if (loading_song) return;
+                song_el.textContent = "audio unavailable";
+                sync();
+            });
+
+            audio.addEventListener("loadedmetadata", () => {
+                loading_song = false;
+            });
+
+            function enter() {
+                if (entered) return;
+                entered = true;
+
+                document.getElementById("gate").classList.add("gone");
+                player.classList.add("show");
+                play_audio();
+            }
+
+            const gate = document.getElementById("gate");
+
+            for (const name of ["pointerdown", "touchstart", "click", "keydown"]) {
+                gate.addEventListener(name, enter, { passive: true });
+            }
+
+            addEventListener("keydown", (e) => {
+                if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") enter();
+            });
+
+            setTimeout(enter, 6000);
+
+            function on_pref_change() {
+                seed();
+                if (reduce_motion.matches) {
+                    root.style.setProperty("--pulse", "0");
+                    level = 0;
+                }
+            }
+
+            if (reduce_motion.addEventListener) {
+                reduce_motion.addEventListener("change", on_pref_change);
+            } else if (reduce_motion.addListener) {
+                reduce_motion.addListener(on_pref_change);
+            }
+
+            const guild_icon = document.getElementById("guild_icon");
+            const guild_name = document.getElementById("guild_name");
+            const guild_online = document.getElementById("guild_online");
+            const guild_members = document.getElementById("guild_members");
+            const guild_join = document.getElementById("guild_join");
+            const guild_code = "pqbYNMDCm8";
+
+            const fmt_num = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+            let guild_timer = 0;
+
+            async function load_guild() {
+                try {
+                    const res = await fetch("https://discord.com/api/v10/invites/" + guild_code + "?with_counts=true", {
+                        headers: { Accept: "application/json" },
+                    });
+
+                    if (!res.ok) throw new Error("http " + res.status);
+
+                    const data = await res.json();
+
+                    if (data.guild && data.guild.name) guild_name.textContent = data.guild.name;
+                    if (data.guild && data.guild.icon) {
+                        guild_icon.src = "https://cdn.discordapp.com/icons/" + data.guild.id + "/" + data.guild.icon + ".png?size=128";
+                    }
+
+                    if (typeof data.approximate_presence_count === "number") {
+                        guild_online.textContent = fmt_num(data.approximate_presence_count) + " Online";
+                    }
+
+                    if (typeof data.approximate_member_count === "number") {
+                        guild_members.textContent = fmt_num(data.approximate_member_count) + " Members";
+                    }
+
+                    if (data.code) guild_join.href = "https://discord.gg/" + data.code;
+                } catch (err) {
+                    guild_online.textContent = "offline";
+                }
+            }
+
+            load_guild();
+            guild_timer = setInterval(load_guild, 300000);
+
+            if (window.ResizeObserver) {
+                const observe = new ResizeObserver(() => {
+                    track_player();
+                    build_wave();
+                });
+                observe.observe(player);
+                observe.observe(wave);
+            } else {
+                addEventListener("resize", () => {
+                    track_player();
+                    build_wave();
+                });
+            }
+
+            track_player();
+            build_wave();
+            loop_wave();
+            load_song(Math.floor(Math.random() * songs.length), false);
+            sync();
+        })();
+    </script>
+</body>
+
+</html>
