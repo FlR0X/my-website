@@ -576,6 +576,35 @@
             const cache_key = "firox_songs_v1";
             let songs = [];
 
+            const offset_cache_key = "firox_offsets_v1";
+            let start_offsets = {};
+            let pending_offset = 0;
+            let offset_applied = false;
+
+            async function load_offsets() {
+                try {
+                    const res = await fetch(song_folder + "/songs.json", { cache: "no-cache" });
+
+                    if (!res.ok) throw new Error("http " + res.status);
+
+                    const data = await res.json();
+                    start_offsets = data && typeof data === "object" ? data : {};
+                    localStorage.setItem(offset_cache_key, JSON.stringify({ at: Date.now(), data: start_offsets }));
+                    console.log("silence offsets loaded: " + Object.keys(start_offsets).length);
+                } catch (err) {
+                    try {
+                        const raw = localStorage.getItem(offset_cache_key);
+                        if (raw && Date.now() - JSON.parse(raw).at < 86400000) {
+                            start_offsets = JSON.parse(raw).data || {};
+                            console.log("silence offsets from cache: " + Object.keys(start_offsets).length);
+                            return;
+                        }
+                    } catch (e) {}
+
+                    console.warn("no silence offsets available");
+                }
+            }
+
             function split_name(stem) {
                 const cut = stem.indexOf(" - ");
 
@@ -716,6 +745,11 @@
 
                 load_token++;
                 loading_song = true;
+
+                const base = song.file.split("/").pop();
+                pending_offset = Number(start_offsets[base]) || 0;
+                offset_applied = false;
+
                 cover.src = song.cover;
                 artist_el.textContent = song.artist;
                 song_el.textContent = song.title;
@@ -871,7 +905,9 @@
 
                 const total = isFinite(audio.duration) ? audio.duration : 0;
                 const now = audio.currentTime || 0;
-                const progress = total ? Math.min(1, now / total) : 0;
+                const start = offset_applied ? pending_offset : 0;
+                const span = Math.max(0.001, total - start);
+                const progress = total ? Math.max(0, Math.min(1, (now - start) / span)) : 0;
                 const rate = progress > smooth_progress ? 0.34 : 0.9;
                 smooth_progress += (progress - smooth_progress) * rate;
                 if (Math.abs(progress - smooth_progress) < 0.0004) smooth_progress = progress;
@@ -910,9 +946,10 @@
             function sync() {
                 const total = isFinite(audio.duration) ? audio.duration : 0;
                 const now = audio.currentTime || 0;
+                const start = offset_applied ? pending_offset : 0;
 
-                time_now.textContent = format_time(now);
-                time_end.textContent = format_time(total);
+                time_now.textContent = format_time(Math.max(0, now - start));
+                time_end.textContent = format_time(Math.max(0, total - start));
 
                 seek.setAttribute("aria-valuenow", String(Math.floor(now)));
                 seek.setAttribute("aria-valuemax", String(Math.floor(total)));
@@ -1012,9 +1049,12 @@
                 const total = isFinite(audio.duration) ? audio.duration : 0;
                 if (!total) return;
 
+                const start = offset_applied ? pending_offset : 0;
+                const span = Math.max(0.001, total - start);
+
                 const box = wave.getBoundingClientRect();
                 const ratio_x = (e.clientX - box.left) / box.width;
-                audio.currentTime = Math.max(0, Math.min(1, ratio_x)) * total;
+                audio.currentTime = start + Math.max(0, Math.min(1, ratio_x)) * span;
             }
 
             play_btn.addEventListener("click", () => {
@@ -1114,6 +1154,15 @@
             audio.addEventListener("loadedmetadata", () => {
                 loading_song = false;
                 song_token = load_token;
+
+                if (!offset_applied && pending_offset > 0) {
+                    offset_applied = true;
+                    try {
+                        audio.currentTime = pending_offset;
+                    } catch (err) {}
+                }
+
+                sync();
             });
 
             function reveal() {
@@ -1217,7 +1266,7 @@
             loop_wave();
             sync();
 
-            load_songs().then(() => {
+            load_songs().then(() => load_offsets()).then(() => {
                 load_song(Math.floor(Math.random() * songs.length), false);
                 sync();
             });
