@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>firox.dev</title>
 
-    <meta name="description" content="firox.dev - cyber tomfoolery" />
-    <meta name="theme-color" content="#FFD1DC" />
+    <meta name="description" content="firox.dev — links and contact." />
+    <meta name="theme-color" content="#0a0a0b" />
     <meta name="color-scheme" content="dark" />
     <meta name="referrer" content="no-referrer" />
 
@@ -705,12 +705,16 @@
             let dragging = false;
             let entered = false;
             let loading_song = false;
+            let play_token = 0;
+            let load_token = 0;
+            let song_token = 0;
             const broken_tracks = [];
 
             function load_song(index, autoplay) {
                 song_at = (index + songs.length) % songs.length;
                 const song = songs[song_at];
 
+                load_token++;
                 loading_song = true;
                 cover.src = song.cover;
                 artist_el.textContent = song.artist;
@@ -975,15 +979,25 @@
             }
 
             function play_audio() {
+                const token = ++play_token;
+
                 try {
                     start_audio().then(
                         () => {
-                            if (!meter_frame) meter_frame = requestAnimationFrame(meter);
+                            if (token === play_token && !meter_frame) {
+                                meter_frame = requestAnimationFrame(meter);
+                            }
                         },
-                        () => toast("audio blocked by browser")
+                        (err) => {
+                            if (token !== play_token) return;
+                            if (err && err.name === "AbortError") return;
+
+                            console.warn("playback rejected:", err && err.name);
+                            toast("browser blocked audio, press play");
+                        }
                     );
                 } catch (err) {
-                    toast("audio blocked by browser");
+                    toast("browser blocked audio, press play");
                 }
             }
 
@@ -1076,11 +1090,16 @@
             audio.addEventListener("error", () => {
                 loading_song = false;
 
+                if (song_token !== load_token) return;
+
+                const code = audio.error ? audio.error.code : 0;
+                if (code === 1) return;
+
                 const broken = songs[song_at].file;
 
                 if (!broken_tracks.includes(broken)) {
                     broken_tracks.push(broken);
-                    console.warn("track failed to load, skipping: " + broken);
+                    console.warn("track failed to load, skipping: " + broken + " (code " + code + ")");
                 }
 
                 if (broken_tracks.length >= songs.length) {
@@ -1094,6 +1113,7 @@
 
             audio.addEventListener("loadedmetadata", () => {
                 loading_song = false;
+                song_token = load_token;
             });
 
             function reveal() {
