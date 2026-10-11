@@ -168,6 +168,7 @@ body::after {
 
 .avatar_wrap {
     position: relative;
+    top: 10px;
     width: clamp(96px, 24vw, 124px);
     aspect-ratio: 1 / 1;
     display: grid;
@@ -197,8 +198,8 @@ body::after {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    transform: scale(calc(0.9 + 0.18 * var(--pulse)));
-    transition: transform 0.055s linear;
+    transform: scale(calc(0.86 + 0.3 * var(--pulse)));
+    transition: transform 0.05s linear;
     will-change: transform;
 }
 
@@ -332,72 +333,104 @@ body::after {
     position: relative;
     width: 100%;
     padding: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    background:
-        radial-gradient(120% 140% at 0% 0%, rgba(255, 185, 255, 0.09), transparent 55%),
-        linear-gradient(160deg, rgba(255, 255, 255, 0.035), rgba(0, 0, 0, 0.5) 60%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    background: rgba(6, 4, 8, 0.55);
     text-align: left;
     overflow: hidden;
-    transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    isolation: isolate;
+    transition: border-color 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease;
+}
+
+@property --guild_angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@property --guild_glow {
+    syntax: "<number>";
+    initial-value: 0;
+    inherits: false;
 }
 
 .guild::before {
     content: "";
     position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    padding: 1px;
-    background: conic-gradient(from 0deg,
-        rgba(255, 185, 255, 0) 0deg,
-        rgba(255, 185, 255, 0.55) 60deg,
-        rgba(255, 185, 255, 0) 140deg,
-        rgba(255, 185, 255, 0) 220deg,
-        rgba(255, 185, 255, 0.45) 290deg,
-        rgba(255, 185, 255, 0) 360deg);
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    mask-composite: exclude;
-    animation: guild_sweep 7s linear infinite;
-    opacity: 0.75;
+    inset: -60%;
+    z-index: 0;
+    background:
+        radial-gradient(28% 34% at 22% 28%, rgba(255, 185, 255, 0.3), transparent 70%),
+        radial-gradient(24% 30% at 78% 66%, rgba(255, 110, 210, 0.26), transparent 70%),
+        radial-gradient(20% 26% at 52% 88%, rgba(190, 120, 255, 0.22), transparent 70%);
+    filter: blur(calc(12px + 6px * var(--guild_glow)));
+    animation: guild_drift 19s ease-in-out infinite alternate;
+    opacity: calc(0.85 + 0.15 * var(--guild_glow));
     pointer-events: none;
 }
 
 .guild::after {
     content: "";
     position: absolute;
-    inset: 0;
-    background: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, 0.06) 50%, transparent 62%);
-    transform: translateX(-100%);
-    animation: guild_shine 6s ease-in-out infinite;
+    inset: -1px;
+    z-index: 1;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(from var(--guild_angle),
+        rgba(255, 185, 255, 0) 0deg,
+        rgba(255, 185, 255, 0.7) 55deg,
+        rgba(255, 185, 255, 0) 130deg,
+        rgba(255, 185, 255, 0) 215deg,
+        rgba(255, 140, 220, 0.6) 275deg,
+        rgba(255, 185, 255, 0) 360deg);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    animation: guild_sweep 5.5s linear infinite;
     pointer-events: none;
 }
 
 .guild:hover {
-    border-color: rgba(255, 185, 255, 0.28);
-    transform: translateY(-2px);
+    border-color: rgba(255, 185, 255, 0.22);
+    transform: translateY(-3px);
 }
 
 .guild > * {
     position: relative;
+    z-index: 2;
+}
+
+.guild_grid {
+    position: absolute;
+    inset: 0;
     z-index: 1;
+    background-image:
+        linear-gradient(rgba(255, 185, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 185, 255, 0.05) 1px, transparent 1px);
+    background-size: 26px 26px;
+    background-position: calc(var(--mx, 0px) * -0.5) calc(var(--my, 0px) * -0.5);
+    mask-image: radial-gradient(120% 100% at 0% 50%, #000 0%, transparent 72%);
+    -webkit-mask-image: radial-gradient(120% 100% at 0% 50%, #000 0%, transparent 72%);
+    transition: background-position 0.18s ease-out;
+    pointer-events: none;
 }
 
 @keyframes guild_sweep {
     to {
-        transform: rotate(360deg);
+        --guild_angle: 360deg;
     }
 }
 
-@keyframes guild_shine {
-    0%,
-    62% {
-        transform: translateX(-100%);
+@keyframes guild_drift {
+    0% {
+        transform: translate3d(calc(-4% + var(--mx, 0px)), calc(-3% + var(--my, 0px)), 0) scale(1);
     }
-    88%,
+    50% {
+        transform: translate3d(calc(5% + var(--mx, 0px)), calc(4% + var(--my, 0px)), 0) scale(1.12);
+    }
     100% {
-        transform: translateX(100%);
+        transform: translate3d(calc(-2% + var(--mx, 0px)), calc(6% + var(--my, 0px)), 0) scale(1.04);
     }
 }
 
@@ -437,8 +470,20 @@ body::after {
     margin: 0;
     font-size: 1rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--white);
     overflow-wrap: anywhere;
+    background: linear-gradient(100deg, #fff 20%, var(--pink) 50%, #fff 80%);
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: guild_text 6s linear infinite;
+}
+
+@keyframes guild_text {
+    to {
+        background-position: 220% 0;
+    }
 }
 
 .guild_stat {
