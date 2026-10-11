@@ -84,7 +84,7 @@
 
     <div class="player" id="player">
         <div class="art">
-            <img id="cover" src="assets/songs/Pashanim - Florenz.jpg" alt="" width="62" height="62" />
+            <img id="cover" src="assets/Songs/Pashanim - Florenz.jpg" alt="" width="62" height="62" />
         </div>
 
         <div class="player_body">
@@ -392,7 +392,6 @@
                 parts.push(p);
 
                 while (parts.length > max_parts) parts.shift();
-                trim_parts();
             }
 
             function on_press(e) {
@@ -573,10 +572,10 @@
             const time_end = document.getElementById("time_end");
 
             const songs = [
-                { artist: "Pashanim", title: "Florenz", file: "assets/songs/Pashanim - Florenz.mp3", cover: "assets/songs/Pashanim - Florenz.jpg" },
-                { artist: "Pashanim", title: "Mittelmeer", file: "assets/songs/Pashanim - Mittelmeer.mp3", cover: "assets/songs/Pashanim - Mittelmeer.jpg" },
-                { artist: "Pashanim", title: "Ms. Jackson", file: "assets/songs/Pashanim - Ms. Jackson.mp3", cover: "assets/songs/Pashanim - Ms. Jackson.jpg" },
-                { artist: "Pashanim", title: "Tr\u00e4ume", file: "assets/songs/Pashanim - Tr\u00e4ume.mp3", cover: "assets/songs/Pashanim - Traeume.jpg" },
+                { artist: "Pashanim", title: "Florenz", file: "assets/Songs/Pashanim - Florenz.mp3", cover: "assets/Songs/Pashanim - Florenz.jpg" },
+                { artist: "Pashanim", title: "Mittelmeer", file: "assets/Songs/Pashanim - Mittelmeer.mp3", cover: "assets/Songs/Pashanim - Mittelmeer.jpg" },
+                { artist: "Pashanim", title: "Ms. Jackson", file: "assets/Songs/Pashanim - Ms. Jackson.mp3", cover: "assets/Songs/Pashanim - Ms. Jackson.jpg" },
+                { artist: "Pashanim", title: "Tr\u00e4ume", file: "assets/Songs/Pashanim - Tr\u00e4ume.mp3", cover: "assets/Songs/Pashanim - Traeume.jpg" },
             ];
 
             let song_at = 0;
@@ -612,6 +611,7 @@
             let dragging = false;
             let entered = false;
             let loading_song = false;
+            const broken_tracks = [];
 
             function load_song(index, autoplay) {
                 song_at = (index + songs.length) % songs.length;
@@ -980,21 +980,38 @@
             audio.addEventListener("ended", () => load_song(pick_song(), true));
 
             audio.addEventListener("error", () => {
-                if (loading_song) return;
-                song_el.textContent = "audio unavailable";
-                sync();
+                loading_song = false;
+
+                const broken = songs[song_at].file;
+
+                if (!broken_tracks.includes(broken)) {
+                    broken_tracks.push(broken);
+                    console.warn("track failed to load, skipping: " + broken);
+                }
+
+                if (broken_tracks.length >= songs.length) {
+                    song_el.textContent = "no tracks could load";
+                    sync();
+                    return;
+                }
+
+                load_song(song_at + 1, !audio.paused);
             });
 
             audio.addEventListener("loadedmetadata", () => {
                 loading_song = false;
             });
 
-            function enter() {
+            function reveal() {
                 if (entered) return;
                 entered = true;
 
                 document.getElementById("gate").classList.add("gone");
                 player.classList.add("show");
+            }
+
+            function enter() {
+                reveal();
                 play_audio();
             }
 
@@ -1008,7 +1025,7 @@
                 if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") enter();
             });
 
-            setTimeout(enter, 6000);
+            setTimeout(reveal, 6000);
 
             function on_pref_change() {
                 seed();
