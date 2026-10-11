@@ -51,6 +51,7 @@
             </ul>
 
             <section class="guild" id="guild" aria-label="source.market discord server">
+                <span class="guild_grid" aria-hidden="true"></span>
                 <div class="guild_row">
                     <div class="guild_left">
                         <img class="guild_icon" id="guild_icon" alt="" width="72" height="72" draggable="false" />
@@ -258,10 +259,10 @@
                 ctx.clearRect(0, 0, view_w, view_h);
 
                 const beat = level * level * (3 - 2 * level);
-                const reach = link_dist * (1 + beat * 0.55);
+                const reach = link_dist * (1 + beat * 0.7);
                 const reach_sq = reach * reach;
-                const dot_alpha = 0.42 + beat * 0.5;
-                const line_boost = 0.22 + beat * 0.42;
+                const dot_alpha = 0.36 + beat * 0.58;
+                const line_boost = 0.18 + beat * 0.55;
                 const mid_x = view_w / 2;
                 const mid_y = view_h / 2;
 
@@ -285,7 +286,7 @@
                             const bd = Math.hypot(bx, by);
 
                             if (bd > 0.01) {
-                                const sway = Math.min(beat * 0.22, 0.3);
+                                const sway = Math.min(beat * 0.75, 0.95);
                                 const wobble = (p.phase + p.spin) % 6.2831853;
                                 p.x += ((bx / bd) * sway * Math.cos(wobble) - (by / bd) * sway * Math.sin(wobble));
                                 p.y += ((by / bd) * sway * Math.cos(wobble) + (bx / bd) * sway * Math.sin(wobble));
@@ -674,6 +675,8 @@
 
             let song_at = 0;
             let played = [];
+            const history = [];
+            let history_at = -1;
 
             function pick_song() {
                 if (songs.length < 2) return 0;
@@ -693,6 +696,35 @@
                 return next;
             }
 
+            function remember(index) {
+                history.length = history_at + 1;
+                history.push(index);
+                history_at = history.length - 1;
+            }
+
+            function go(index, autoplay) {
+                remember(index);
+                load_song(index, autoplay);
+            }
+
+            function go_next(autoplay) {
+                if (history_at < history.length - 1) {
+                    history_at++;
+                    load_song(history[history_at], autoplay);
+                    return;
+                }
+
+                go(pick_song(), autoplay);
+            }
+
+            function go_back(autoplay) {
+                if (history_at <= 0) return null;
+
+                history_at--;
+                load_song(history[history_at], autoplay);
+                return history[history_at];
+            }
+
             audio.volume = 0.12;
             if (location.protocol !== "file:") audio.crossOrigin = "anonymous";
 
@@ -701,6 +733,8 @@
             let bins = null;
             let smooth = 0;
             let peak = 0.02;
+            let low = 1;
+            let high = 0;
             let meter_frame = 0;
             let dragging = false;
             let entered = false;
@@ -947,9 +981,18 @@
 
                     const rms = Math.sqrt(sum / bins.length);
                     peak = Math.max(rms, peak * 0.9993);
-                    const gain = Math.min(45, Math.max(3, 0.82 / Math.max(peak, 0.0005)));
-                    const level_now = Math.min(1, Math.pow(rms * gain, 0.72));
-                    smooth += (level_now - smooth) * (level_now > smooth ? 0.55 : 0.07);
+                    const gain = Math.min(60, Math.max(3, 0.88 / Math.max(peak, 0.0005)));
+                    const raw = Math.min(1, Math.pow(rms * gain, 1.15));
+
+                    if (raw < low) low = raw;
+                    else low += 0.0006 * (raw - low);
+
+                    if (raw > high) high = raw;
+                    else high += 0.0004 * (raw - high);
+
+                    const width = Math.max(0.1, high - low);
+                    const level_now = Math.max(0, Math.min(1, (raw - low) / width));
+                    smooth += (level_now - smooth) * (level_now > smooth ? 0.6 : 0.06);
                 } else {
                     smooth += (0 - smooth) * 0.06;
                 }
@@ -1025,17 +1068,19 @@
                     audio.pause();
                 }
             });
-
-            back_btn.addEventListener("click", () => {
+back_btn.addEventListener("click", () => {
                 if ((audio.currentTime || 0) > 3) {
                     audio.currentTime = 0;
                     sync();
                     return;
                 }
-                load_song(pick_song(), !audio.paused);
+
+                if (go_back(!audio.paused) === null) {
+                    toast("no earlier track");
+                }
             });
 
-            fwd_btn.addEventListener("click", () => load_song(pick_song(), !audio.paused));
+            fwd_btn.addEventListener("click", () => go_next(!audio.paused));
 
             mute_btn.addEventListener("click", () => {
                 audio.muted = !audio.muted;
@@ -1086,7 +1131,7 @@
                 audio.addEventListener(name, sync);
             }
 
-            audio.addEventListener("ended", () => load_song(pick_song(), true));
+            audio.addEventListener("ended", () => go_next(true));
 
             audio.addEventListener("error", () => {
                 loading_song = false;
@@ -1220,7 +1265,7 @@
             sync();
 
             load_songs().then(() => {
-                load_song(Math.floor(Math.random() * songs.length), false);
+                go(Math.floor(Math.random() * songs.length), false);
                 sync();
             });
         })();
