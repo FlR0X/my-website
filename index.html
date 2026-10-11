@@ -571,12 +571,106 @@
             const time_now = document.getElementById("time_now");
             const time_end = document.getElementById("time_end");
 
-            const songs = [
-                { artist: "Pashanim", title: "Florenz", file: "assets/Songs/Pashanim - Florenz.mp3", cover: "assets/Songs/Pashanim - Florenz.jpg" },
-                { artist: "Pashanim", title: "Mittelmeer", file: "assets/Songs/Pashanim - Mittelmeer.mp3", cover: "assets/Songs/Pashanim - Mittelmeer.jpg" },
-                { artist: "Pashanim", title: "Ms. Jackson", file: "assets/Songs/Pashanim - Ms. Jackson.mp3", cover: "assets/Songs/Pashanim - Ms. Jackson.jpg" },
-                { artist: "Pashanim", title: "Tr\u00e4ume", file: "assets/Songs/Pashanim - Tr\u00e4ume.mp3", cover: "assets/Songs/Pashanim - Traeume.jpg" },
-            ];
+            const song_folder = "assets/Songs";
+            const repo_api = "https://api.github.com/repos/FlR0x/my-website/contents/";
+            const cache_key = "firox_songs_v1";
+            let songs = [];
+
+            function split_name(stem) {
+                const cut = stem.indexOf(" - ");
+
+                if (cut > 0) {
+                    return { artist: stem.slice(0, cut).trim(), title: stem.slice(cut + 3).trim() };
+                }
+
+                return { artist: "", title: stem };
+            }
+
+            function fold(text) {
+                return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+            }
+
+            function loose(text) {
+                return fold(text).replace(/ae/g, "a").replace(/oe/g, "o").replace(/ue/g, "u");
+            }
+
+            function find_cover(stem, covers) {
+                return covers.get(fold(stem)) || covers.get(loose(stem)) || "";
+            }
+
+            function build_from_listing(files) {
+                const stems = new Set();
+                const covers = new Map();
+
+                for (const f of files) {
+                    if (f.type !== "file") continue;
+                    if (/\.mp3$/i.test(f.name)) stems.add(f.name.replace(/\.mp3$/i, ""));
+
+                    if (/\.jpg$/i.test(f.name)) {
+                        const base = f.name.replace(/\.jpg$/i, "");
+                        covers.set(fold(base), f.name);
+                        covers.set(loose(base), f.name);
+                    }
+                }
+
+                const built = [];
+
+                for (const stem of stems) {
+                    const names = split_name(stem);
+                    const cover_name = find_cover(stem, covers);
+
+                    built.push({
+                        artist: names.artist,
+                        title: names.title,
+                        file: song_folder + "/" + stem + ".mp3",
+                        cover: cover_name ? song_folder + "/" + cover_name : "",
+                    });
+                }
+
+                built.sort((a, b) => a.title.localeCompare(b.title));
+                return built;
+            }
+
+            async function load_songs() {
+                try {
+                    const cached = localStorage.getItem(cache_key);
+                    const age = cached ? Date.now() - Number(JSON.parse(cached).at) : Infinity;
+
+                    if (cached && age < 900000) {
+                        const parsed = JSON.parse(cached);
+                        if (Array.isArray(parsed.list) && parsed.list.length) {
+                            songs = parsed.list;
+                            console.log("songs loaded from cache: " + songs.length);
+                            return;
+                        }
+                    }
+                } catch (err) {}
+
+                try {
+                    const res = await fetch(repo_api + song_folder + "?ref=main", {
+                        headers: { Accept: "application/vnd.github+json" },
+                    });
+
+                    if (!res.ok) throw new Error("http " + res.status);
+
+                    const files = await res.json();
+                    const built = build_from_listing(files);
+
+                    if (!built.length) throw new Error("no tracks found");
+
+                    songs = built;
+                    localStorage.setItem(cache_key, JSON.stringify({ at: Date.now(), list: built }));
+                    console.log("songs discovered from repo: " + songs.length);
+                } catch (err) {
+                    console.warn("song discovery failed, using fallback: " + err.message);
+                    songs = songs.length ? songs : [];
+                }
+            }
+
+            cover.addEventListener("error", () => {
+                if (cover.src.endsWith("astolfo_pink.png")) return;
+                cover.src = "assets/astolfo_pink.png";
+            });
 
             let song_at = 0;
             let played = [];
@@ -1101,8 +1195,12 @@
             track_player();
             build_wave();
             loop_wave();
-            load_song(Math.floor(Math.random() * songs.length), false);
             sync();
+
+            load_songs().then(() => {
+                load_song(Math.floor(Math.random() * songs.length), false);
+                sync();
+            });
         })();
     </script>
 </body>
