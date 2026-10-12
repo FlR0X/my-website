@@ -342,12 +342,6 @@ body::after {
     transition: border-color 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease;
 }
 
-@property --guild_angle {
-    syntax: "<angle>";
-    initial-value: 0deg;
-    inherits: false;
-}
-
 @property --guild_glow {
     syntax: "<number>";
     initial-value: 0;
@@ -376,18 +370,22 @@ body::after {
     z-index: 1;
     border-radius: inherit;
     padding: 1px;
-    background: conic-gradient(from var(--guild_angle),
+    background: conic-gradient(from 205deg,
         rgba(255, 185, 255, 0) 0deg,
-        rgba(255, 185, 255, 0.7) 55deg,
-        rgba(255, 185, 255, 0) 130deg,
-        rgba(255, 185, 255, 0) 215deg,
-        rgba(255, 140, 220, 0.6) 275deg,
+        rgba(255, 185, 255, 0.28) 14deg,
+        rgba(255, 185, 255, 0.85) 34deg,
+        rgba(255, 200, 255, 0.3) 50deg,
+        rgba(255, 185, 255, 0) 72deg,
+        rgba(255, 185, 255, 0) 152deg,
+        rgba(255, 140, 220, 0.26) 170deg,
+        rgba(255, 140, 220, 0.8) 214deg,
+        rgba(255, 160, 230, 0.28) 230deg,
+        rgba(255, 185, 255, 0) 252deg,
         rgba(255, 185, 255, 0) 360deg);
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     mask-composite: exclude;
-    animation: guild_sweep 5.5s linear infinite;
     pointer-events: none;
 }
 
@@ -414,12 +412,6 @@ body::after {
     -webkit-mask-image: radial-gradient(120% 100% at 0% 50%, #000 0%, transparent 72%);
     transition: background-position 0.18s ease-out;
     pointer-events: none;
-}
-
-@keyframes guild_sweep {
-    to {
-        --guild_angle: 360deg;
-    }
 }
 
 @keyframes guild_drift {
