@@ -335,7 +335,7 @@ body::after {
     padding: 16px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 18px;
-    background: rgba(6, 4, 8, 0.55);
+    background: linear-gradient(160deg, rgb(18, 11, 20), rgb(7, 5, 9));
     text-align: left;
     overflow: hidden;
     isolation: isolate;
