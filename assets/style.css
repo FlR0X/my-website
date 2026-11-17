@@ -385,15 +385,61 @@ audio {
 
 .links a {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
     gap: 12px;
     align-items: baseline;
     padding: 14px 2px;
     color: var(--ink);
 }
 
-.link_name {
+.link_icon {
     grid-column: 1;
+    align-self: center;
+    width: clamp(20px, 1.6vw, 23px);
+    height: clamp(20px, 1.6vw, 23px);
+    background-color: var(--rose);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    transition: background-color 0.2s ease, transform 0.22s ease;
+}
+
+.link_icon_youtube {
+    -webkit-mask-image: url("icons/youtube.png");
+    mask-image: url("icons/youtube.png");
+}
+
+.link_icon_telegram {
+    -webkit-mask-image: url("icons/telegram.png");
+    mask-image: url("icons/telegram.png");
+}
+
+.link_icon_github {
+    -webkit-mask-image: url("icons/github.png");
+    mask-image: url("icons/github.png");
+}
+
+.link_icon_ezbio {
+    -webkit-mask-image: url("icons/ezbio.png");
+    mask-image: url("icons/ezbio.png");
+}
+
+.link_icon_discord {
+    -webkit-mask-image: url("icons/discord.png");
+    mask-image: url("icons/discord.png");
+}
+
+.links a:hover .link_icon,
+.links a:focus-visible .link_icon {
+    background-color: var(--rose_deep);
+    transform: rotate(-5deg) scale(1.08);
+}
+
+.link_name {
+    grid-column: 2;
     font-family: var(--font_display);
     font-size: clamp(1.8rem, 3vw, 2.35rem);
     font-style: italic;
@@ -414,7 +460,7 @@ audio {
 
 .badge {
     display: inline-flex;
-    grid-column: 2;
+    grid-column: 3;
     align-items: baseline;
     align-self: center;
     justify-self: end;
@@ -442,7 +488,7 @@ audio {
 }
 
 .link_arrow {
-    grid-column: 3;
+    grid-column: 4;
     align-self: center;
     justify-self: end;
     color: var(--rose);
@@ -1113,11 +1159,15 @@ audio {
     }
 
     .links a {
-        padding: 8px 2px;
+        padding: 6px 2px;
+    }
+
+    .link_name {
+        font-size: 1.5rem;
     }
 
     .hire {
-        margin-top: 4px;
+        margin-top: 2px;
     }
 
     .player {
