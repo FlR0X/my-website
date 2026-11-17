@@ -70,25 +70,36 @@
                 <div class="links_block">
                     <ul class="links">
                         <li>
+                            <a href="https://www.youtube.com/@firox1337" target="_blank" rel="noopener noreferrer">
+                                <span class="link_icon link_icon_youtube" aria-hidden="true"></span>
+                                <span class="link_name">youtube</span>
+                                <span class="link_arrow" aria-hidden="true">↗</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="https://t.me/iFirox" target="_blank" rel="noopener noreferrer">
+                                <span class="link_icon link_icon_telegram" aria-hidden="true"></span>
                                 <span class="link_name">telegram</span>
                                 <span class="link_arrow" aria-hidden="true">↗</span>
                             </a>
                         </li>
                         <li>
                             <a href="https://github.com/Flr0x" target="_blank" rel="noopener noreferrer">
+                                <span class="link_icon link_icon_github" aria-hidden="true"></span>
                                 <span class="link_name">github</span>
                                 <span class="link_arrow" aria-hidden="true">↗</span>
                             </a>
                         </li>
                         <li>
                             <a href="https://e-z.bio/ioctl" target="_blank" rel="noopener noreferrer">
+                                <span class="link_icon link_icon_ezbio" aria-hidden="true"></span>
                                 <span class="link_name">more socials</span>
                                 <span class="link_arrow" aria-hidden="true">↗</span>
                             </a>
                         </li>
                         <li>
                             <a href="#" id="copy" data-copy="gworld.">
+                                <span class="link_icon link_icon_discord" aria-hidden="true"></span>
                                 <span class="link_name">discord</span>
                                 <span class="badge"><span class="badge_tag">@gworld.</span><span
                                         class="badge_copy">copy</span></span>
@@ -951,20 +962,20 @@
             const time_end = document.getElementById("time_end");
 
             const song_folder = "assets/Songs";
-            const repo_api = "https://api.github.com/repos/FlR0x/my-website/contents/";
+            // full recursive tree: no 1,000-file cap like the contents endpoint
+            const repo_tree = "https://api.github.com/repos/FlR0x/my-website/git/trees/main?recursive=1";
             const repo_raw = "https://raw.githubusercontent.com/FlR0x/my-website/main/";
             const cdn_base = "https://cdn.jsdelivr.net/gh/FlR0X/my-website@main/";
-            const cache_key = "firox_songs_v3";
+            const cache_key = "firox_songs_v4";
             let songs = [];
 
-            function source_url(file) {
-                const path = song_folder + "/" + file.name;
+            function source_url(path, name) {
                 const encoded = path.split("/").map(encodeURIComponent).join("/");
 
                 // raw.github sends an unquoted filename with commas, which Chromium rejects
-                if (file.name.indexOf(",") !== -1) return cdn_base + encoded;
+                if (name.indexOf(",") !== -1) return cdn_base + encoded;
 
-                return file.download_url || repo_raw + encoded;
+                return repo_raw + encoded;
             }
 
             function split_name(stem) {
@@ -989,38 +1000,41 @@
                 return covers.get(fold(stem)) || covers.get(loose(stem)) || "";
             }
 
-            function build_from_listing(files) {
-                const tracks = new Map();
+            function build_from_tree(entries) {
+                const tracks = [];
                 const covers = new Map();
+                const prefix = song_folder.toLowerCase() + "/";
 
-                for (const f of files) {
-                    if (f.type !== "file") continue;
+                for (const f of entries) {
+                    if (f.type !== "blob" || typeof f.path !== "string") continue;
+                    if (f.path.toLowerCase().indexOf(prefix) !== 0) continue;
 
-                    if (/\.mp3$/i.test(f.name)) {
-                        const stem = f.name.replace(/\.mp3$/i, "");
-                        tracks.set(stem, source_url(f));
-                    }
+                    const slash = f.path.lastIndexOf("/");
+                    const dir = f.path.slice(0, slash);
+                    const name = f.path.slice(slash + 1);
 
-                    if (/\.(jpe?g|png|webp)$/i.test(f.name)) {
-                        const base = f.name.replace(/\.(jpe?g|png|webp)$/i, "");
-                        const url = source_url(f);
-                        covers.set(fold(base), url);
-                        covers.set(loose(base), url);
+                    if (/\.mp3$/i.test(name)) {
+                        const stem = name.replace(/\.mp3$/i, "");
+                        tracks.push({ dir, stem, file: source_url(f.path, name) });
+                    } else if (/\.(jpe?g|png|webp)$/i.test(name)) {
+                        const base = name.replace(/\.(jpe?g|png|webp)$/i, "");
+                        const url = source_url(f.path, name);
+                        const key = dir + "/" + base;
+                        covers.set(fold(key), url);
+                        covers.set(loose(key), url);
                     }
                 }
 
-                const built = [];
+                const built = tracks.map((track) => {
+                    const names = split_name(track.stem);
 
-                for (const [stem, url] of tracks) {
-                    const names = split_name(stem);
-
-                    built.push({
+                    return {
                         artist: names.artist,
                         title: names.title,
-                        file: url,
-                        cover: find_cover(stem, covers),
-                    });
-                }
+                        file: track.file,
+                        cover: find_cover(track.dir + "/" + track.stem, covers),
+                    };
+                });
 
                 built.sort((a, b) => a.title.localeCompare(b.title));
                 return built;
@@ -1047,14 +1061,19 @@
 
                     for (let attempt = 0; attempt < 3 && !built; attempt++) {
                         try {
-                            const res = await fetch(repo_api + song_folder + "?ref=main", {
+                            const res = await fetch(repo_tree, {
                                 headers: { Accept: "application/vnd.github+json" },
                             });
 
                             if (!res.ok) throw new Error("http " + res.status);
 
-                            const files = await res.json();
-                            built = build_from_listing(files);
+                            const data = await res.json();
+
+                            if (data.truncated) {
+                                console.warn("repo tree is truncated; some tracks may be missing");
+                            }
+
+                            built = build_from_tree(Array.isArray(data.tree) ? data.tree : []);
 
                             if (!built.length) throw new Error("no tracks found");
                         } catch (err) {
