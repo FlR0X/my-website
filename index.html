@@ -785,13 +785,18 @@
                 const text_box = discord_text.getBoundingClientRect();
                 if (!text_box.height) return;
 
-                discord_art.style.height = text_box.height + "px";
-                discord_art.style.aspectRatio = "auto";
+                const size = Math.min(Math.max(text_box.height, 40), 68);
+
+                discord_art.style.width = size + "px";
+                discord_art.style.height = size + "px";
+                discord_art.style.aspectRatio = "1";
                 discord_art.style.alignSelf = "center";
                 discord_art.style.transform = "none";
 
+                const settled = discord_text.getBoundingClientRect();
                 const art_box = discord_art.getBoundingClientRect();
-                discord_art.style.transform = "translateY(" + (text_box.top - art_box.top) + "px)";
+                const offset = settled.top + (settled.height - art_box.height) / 2 - art_box.top;
+                discord_art.style.transform = "translateY(" + offset + "px)";
             }
 
             function read_discord_cache() {
@@ -948,11 +953,18 @@
             const song_folder = "assets/Songs";
             const repo_api = "https://api.github.com/repos/FlR0x/my-website/contents/";
             const repo_raw = "https://raw.githubusercontent.com/FlR0x/my-website/main/";
-            const cache_key = "firox_songs_v2";
+            const cdn_base = "https://cdn.jsdelivr.net/gh/FlR0X/my-website@main/";
+            const cache_key = "firox_songs_v3";
             let songs = [];
 
-            function repo_file(path) {
-                return repo_raw + path.split("/").map(encodeURIComponent).join("/");
+            function source_url(file) {
+                const path = song_folder + "/" + file.name;
+                const encoded = path.split("/").map(encodeURIComponent).join("/");
+
+                // raw.github sends an unquoted filename with commas, which Chromium rejects
+                if (file.name.indexOf(",") !== -1) return cdn_base + encoded;
+
+                return file.download_url || repo_raw + encoded;
             }
 
             function split_name(stem) {
@@ -986,12 +998,12 @@
 
                     if (/\.mp3$/i.test(f.name)) {
                         const stem = f.name.replace(/\.mp3$/i, "");
-                        tracks.set(stem, f.download_url || repo_file(song_folder + "/" + f.name));
+                        tracks.set(stem, source_url(f));
                     }
 
                     if (/\.(jpe?g|png|webp)$/i.test(f.name)) {
                         const base = f.name.replace(/\.(jpe?g|png|webp)$/i, "");
-                        const url = f.download_url || repo_file(song_folder + "/" + f.name);
+                        const url = source_url(f);
                         covers.set(fold(base), url);
                         covers.set(loose(base), url);
                     }
