@@ -6,54 +6,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>firox.dev</title>
 
-    <meta name="description" content="firox.dev - cyber tomfoolery" />
-    <meta name="theme-color" content="#FFD1DC" />
-    <meta name="color-scheme" content="dark" />
+    <meta name="description" content="firox.dev — cyber tomfoolery, mostly." />
+    <meta name="theme-color" content="#fdeef6" />
+    <meta name="color-scheme" content="light" />
     <meta name="referrer" content="no-referrer" />
 
     <link rel="icon" type="image/png" href="assets/favicon.png" sizes="64x64" />
-    <link rel="apple-touch-icon" href="assets/astolfo_pink.png" />
+    <link rel="apple-touch-icon" href="assets/favicon.png" />
     <link rel="mask-icon" href="assets/favicon.png" color="#ffb9ff" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,600&display=swap"
+        rel="stylesheet" />
     <link rel="stylesheet" href="assets/style.css" />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content="firox.dev" />
-    <meta property="og:description" content="firox.dev — links and contact." />
+    <meta property="og:description" content="cyber tomfoolery, mostly." />
     <meta property="og:url" content="https://firox.dev/" />
-    <meta property="og:image" content="https://firox.dev/assets/astolfo_pink.png" />
+    <meta property="og:image" content="https://firox.dev/assets/favicon.png" />
     <meta name="twitter:card" content="summary" />
 </head>
 
 <body>
     <canvas id="bg" aria-hidden="true"></canvas>
 
-    <main class="shell">
-        <div class="card">
-            <div class="avatar_wrap">
-                <span class="avatar_glow" aria-hidden="true"></span>
-                <img class="avatar" src="assets/astolfo_pink.png" alt="" width="132" height="132" />
-            </div>
+    <div class="page">
+        <main class="shell" id="top">
+            <section class="hero">
+                <div class="intro">
+                    <h1 class="title">
+                        <span class="title_word">firox</span><span class="title_tld">.dev</span>
+                        <svg class="title_scribble" viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true">
+                            <path d="M30 12 C 76 5, 138 4, 193 8 C 234 11, 268 13, 297 7"></path>
+                        </svg>
+                    </h1>
 
-            <div class="head">
-                <h1 class="title">firox.dev</h1>
-                <p class="tagline">
-                    <span class="dot">//</span> <span class="rotator" id="rotator"></span><span
-                        class="caret" aria-hidden="true"></span>
-                </p>
-            </div>
+                    <p class="tagline">
+                        <span class="rotator" id="rotator"></span><span class="caret" aria-hidden="true"></span>
+                    </p>
 
-            <ul class="links">
-                <li><a href="https://t.me/iFirox" target="_blank" rel="noopener noreferrer">telegram</a></li>
-                <li><a href="https://github.com/Flr0x" target="_blank" rel="noopener noreferrer">github</a></li>
-                <li><a href="https://e-z.bio/ioctl" target="_blank" rel="noopener noreferrer">more socials</a></li>
-                <li><a href="#" id="copy" data-copy="gworld.">discord user <span class="badge">copy</span></a></li>
-            </ul>
-        </div>
-    </main>
+                    <p class="motto"><span class="motto_highlight">cyber tomfoolery</span>, mostly.</p>
 
-    <div class="player" id="player">
+                    <aside class="discord_scrap" id="discord_scrap">
+                        <div class="discord_pic">
+                            <img id="discord_avatar"
+                                src="https://cdn.discordapp.com/avatars/1187498771756630026/4ec2be0cecfdc4e55d5cf25b11a34b0e.webp?size=96"
+                                alt="" width="52" height="52" loading="lazy" />
+                            <span class="discord_dot" id="discord_dot" data_status="offline" hidden></span>
+                        </div>
+                        <div class="discord_text">
+                            <p class="discord_handle"><span id="discord_name">Firox</span><span class="discord_user"
+                                    id="discord_tag">(@gworld.)</span></p>
+                            <p class="discord_line"><img class="discord_emoji" id="discord_emoji" alt="" hidden /><span
+                                    id="discord_line">discord presence</span></p>
+                            <p class="discord_activity" id="discord_activity" hidden></p>
+                        </div>
+                        <img class="discord_art" id="discord_art" alt="" hidden />
+                    </aside>
+                </div>
+
+                <div class="links_block">
+                    <ul class="links">
+                        <li>
+                            <a href="https://t.me/iFirox" target="_blank" rel="noopener noreferrer">
+                                <span class="link_name">telegram</span>
+                                <span class="link_arrow" aria-hidden="true">↗</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/Flr0x" target="_blank" rel="noopener noreferrer">
+                                <span class="link_name">github</span>
+                                <span class="link_arrow" aria-hidden="true">↗</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://e-z.bio/ioctl" target="_blank" rel="noopener noreferrer">
+                                <span class="link_name">more socials</span>
+                                <span class="link_arrow" aria-hidden="true">↗</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="copy" data-copy="gworld.">
+                                <span class="link_name">discord</span>
+                                <span class="badge"><span class="badge_tag">@gworld.</span><span
+                                        class="badge_copy">copy</span></span>
+                                <span class="link_arrow" aria-hidden="true">↗</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="hire">
+                        <span class="hire_text">hire me for work!</span>
+                        <svg class="hire_arrow" viewBox="0 0 180 76" aria-hidden="true">
+                            <path class="hire_line" d="M7 55 C 44 66, 89 61, 128 44 C 146 36, 158 26, 166 15"></path>
+                            <path class="hire_head" d="M149 17 L 168 13 L 169 33"></path>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="player show" id="player">
         <div class="art">
-            <img id="cover" src="assets/Songs/Pashanim - Florenz.jpg" alt="" width="62" height="62" />
+            <img id="cover" src="assets/astolfo_pink.png" alt="" width="72" height="72" />
         </div>
 
         <div class="player_body">
@@ -66,12 +124,14 @@
                 <div class="player_vol">
                     <button class="vol_mute" id="mute" type="button" aria-label="mute" title="mute">
                         <svg class="ico ico_vol" viewBox="0 0 24 24" aria-hidden="true">
-                            <polygon class="ico_glyph" points="11 4 6.5 8.5 2.5 8.5 2.5 15.5 6.5 15.5 11 20 11 4"></polygon>
+                            <polygon class="ico_glyph" points="11 4 6.5 8.5 2.5 8.5 2.5 15.5 6.5 15.5 11 20 11 4">
+                            </polygon>
                             <path class="wave" d="M15.2 8.9a4.2 4.2 0 0 1 0 6.2"></path>
                             <path class="wave" d="M18.1 6a8.4 8.4 0 0 1 0 12"></path>
                         </svg>
                         <svg class="ico ico_mute" viewBox="0 0 24 24" aria-hidden="true">
-                            <polygon class="ico_glyph" points="11 4 6.5 8.5 2.5 8.5 2.5 15.5 6.5 15.5 11 20 11 4"></polygon>
+                            <polygon class="ico_glyph" points="11 4 6.5 8.5 2.5 8.5 2.5 15.5 6.5 15.5 11 20 11 4">
+                            </polygon>
                             <line class="wave" x1="16" y1="9.5" x2="21.5" y2="14.5"></line>
                             <line class="wave" x1="21.5" y1="9.5" x2="16" y2="14.5"></line>
                         </svg>
@@ -81,8 +141,8 @@
                 </div>
             </div>
 
-            <div class="seek" id="seek" role="slider" tabindex="0" aria-label="seek"
-                aria-valuemin="0" aria-valuemax="0" aria-valuenow="0">
+            <div class="seek" id="seek" role="slider" tabindex="0" aria-label="seek" aria-valuemin="0"
+                aria-valuemax="0" aria-valuenow="0">
                 <canvas class="wave" id="wave"></canvas>
                 <div class="times">
                     <span id="time_now">0:00</span>
@@ -116,13 +176,7 @@
                 </button>
             </div>
         </div>
-
-        <div class="vol" id="vol"></div>
     </div>
-
-    <button class="gate" id="gate" type="button" aria-label="enter site and start music">
-        <span class="gate_text">click anywhere to enter...</span>
-    </button>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -132,10 +186,7 @@
         (() => {
             "use strict";
 
-            const pink = "255,185,255";
-            const link_dist = 132;
             const pointer_dist = 190;
-            const reduce_motion = matchMedia("(prefers-reduced-motion: reduce)");
 
             const canvas = document.getElementById("bg");
             const ctx = canvas.getContext("2d", { alpha: true });
@@ -146,57 +197,109 @@
             let parts = [];
             let resize_timer = 0;
             let level = 0;
-            let clock = 0;
+            let flow_t = 0;
             let last_t = 0;
-            const max_parts = 90;
+            const max_parts = 210;
 
-            const pointer = { x: -9999, y: -9999, active: false };
+            const pointer = { x: -9999, y: -9999, tx: -9999, ty: -9999, active: false };
+
+            function make_dust(core, halo) {
+                const sprite = document.createElement("canvas");
+                sprite.width = 48;
+                sprite.height = 48;
+
+                const g = sprite.getContext("2d");
+                const grad = g.createRadialGradient(24, 24, 0, 24, 24, 24);
+                grad.addColorStop(0, "rgba(" + core + ", 0.95)");
+                grad.addColorStop(0.28, "rgba(" + core + ", 0.55)");
+                grad.addColorStop(0.62, "rgba(" + halo + ", 0.16)");
+                grad.addColorStop(1, "rgba(" + halo + ", 0)");
+                g.fillStyle = grad;
+                g.fillRect(0, 0, 48, 48);
+
+                return sprite;
+            }
+
+            function make_petal(inner, outer, vein) {
+                const sprite = document.createElement("canvas");
+                sprite.width = 96;
+                sprite.height = 96;
+
+                const g = sprite.getContext("2d");
+                g.translate(48, 48);
+                g.rotate(-Math.PI / 2);
+
+                const grad = g.createLinearGradient(0, -32, 0, 32);
+                grad.addColorStop(0, inner);
+                grad.addColorStop(0.72, outer);
+                grad.addColorStop(1, "rgba(255, 246, 246, 0.08)");
+                g.fillStyle = grad;
+
+                g.beginPath();
+                g.moveTo(0, -32);
+                g.bezierCurveTo(24, -22, 29, 5, 0, 32);
+                g.bezierCurveTo(-29, 5, -24, -22, 0, -32);
+                g.closePath();
+                g.fill();
+
+                g.globalAlpha = 0.52;
+                g.strokeStyle = vein;
+                g.lineWidth = 1.1;
+                g.beginPath();
+                g.moveTo(0, -25);
+                g.quadraticCurveTo(5, -1, 0, 24);
+                g.stroke();
+
+                g.globalAlpha = 0.4;
+                g.beginPath();
+                g.moveTo(0, -6);
+                g.quadraticCurveTo(9, 0, 13, 11);
+                g.stroke();
+
+                return sprite;
+            }
+
+            const dusts = [
+                make_dust("228, 154, 178", "245, 203, 215"),
+                make_dust("236, 173, 154", "247, 213, 198"),
+                make_dust("207, 157, 188", "236, 202, 220"),
+            ];
+
+            const petals = [
+                make_petal("rgba(247, 193, 210, 0.92)", "rgba(228, 143, 171, 0.6)", "rgba(156, 77, 105, 0.55)"),
+                make_petal("rgba(251, 220, 207, 0.88)", "rgba(236, 177, 166, 0.56)", "rgba(166, 96, 88, 0.45)"),
+                make_petal("rgba(240, 208, 223, 0.86)", "rgba(211, 161, 186, 0.5)", "rgba(136, 81, 108, 0.42)"),
+            ];
 
             function base_count() {
-                return Math.max(22, Math.min(max_parts, Math.round((view_w * view_h) / 26000)));
+                return Math.max(40, Math.min(max_parts, Math.round((view_w * view_h) / 10500)));
             }
 
             function seed() {
-                if (reduce_motion.matches) {
-                    parts = [];
-                    return;
-                }
-
-                const count = base_count();
-                const cols = Math.ceil(Math.sqrt(count * (view_w / view_h)));
-                const rows = Math.ceil(count / cols);
-                const cell_w = view_w / cols;
-                const cell_h = view_h / rows;
-
-                parts = Array.from({ length: count }, (_, i) => {
-                    const p = make_part();
-                    const col = i % cols;
-                    const row = Math.floor(i / cols) % rows;
-
-                    p.hx = (col + 0.5 + (Math.random() - 0.5) * 0.9) * cell_w;
-                    p.hy = (row + 0.5 + (Math.random() - 0.5) * 0.9) * cell_h;
-                    p.x = p.hx;
-                    p.y = p.hy;
-
-                    return p;
-                });
+                parts = Array.from({ length: base_count() }, () => make_part());
             }
 
-            function make_part() {
+            function make_part(x, y) {
+                const z = 0.3 + Math.random() * 0.7;
+                const petal = Math.random() < 0.2;
+                const tint = Math.floor(Math.random() * (petal ? petals.length : dusts.length));
+
                 return {
-                    x: Math.random() * view_w,
-                    y: Math.random() * view_h,
-                    hx: Math.random() * view_w,
-                    hy: Math.random() * view_h,
-                    x: 0,
-                    y: 0,
-                    px: 0,
-                    py: 0,
-                    wa: 7 + Math.random() * 14,
-                    wf: 0.5 + Math.random() * 1.05,
-                    ph: Math.random() * 6.2831853,
-                    ph2: Math.random() * 6.2831853,
-                    r: 0.6 + Math.random() * 1.5,
+                    x: x === undefined ? Math.random() * view_w : x,
+                    y: y === undefined ? Math.random() * view_h : y,
+                    dir: Math.random() * Math.PI * 2,
+                    spd: petal ? 16 + Math.random() * 26 + z * 16 : 34 + Math.random() * 68 + z * 24,
+                    rot: Math.random() * Math.PI * 2,
+                    spin: (Math.random() - 0.5) * (petal ? 1.2 : 0),
+                    ix: 0,
+                    iy: 0,
+                    z: z,
+                    tint: tint,
+                    petal: petal,
+                    size: petal ? 14 + Math.random() * 17 : 2.5 + Math.random() * 5.5,
+                    a: petal ? 0.3 + Math.random() * 0.3 : 0.16 + Math.random() * 0.3,
+                    ph: Math.random() * Math.PI * 2,
+                    tw: 0.6 + Math.random() * 1.8,
                     burst: 0,
                     scared: 0,
                     life: 0,
@@ -220,7 +323,7 @@
             }
 
             function edge_fade(x, y) {
-                const margin = 10;
+                const margin = 60;
                 const dx = Math.min(x, view_w - x);
                 const dy = Math.min(y, view_h - y);
                 const near = Math.min(dx, dy);
@@ -238,27 +341,28 @@
                 const now_t = performance.now();
                 const dt = last_t ? Math.min(0.05, (now_t - last_t) / 1000) : 0.016;
                 last_t = now_t;
-                clock += dt;
 
                 const beat = level * level * (3 - 2 * level);
-                const reach = link_dist * (1 + beat * 0.7);
-                const reach_sq = reach * reach;
-                const dot_alpha = 0.36 + beat * 0.58;
-                const line_boost = 0.18 + beat * 0.55;
-                const still = reduce_motion.matches;
-                const frames = dt * 60;
                 let dirty = false;
+
+                flow_t += dt * (0.55 + beat * 1.1);
+
+                if (pointer.active) {
+                    const follow = Math.min(1, dt * 22);
+                    pointer.x += (pointer.tx - pointer.x) * follow;
+                    pointer.y += (pointer.ty - pointer.y) * follow;
+                }
 
                 for (let i = 0; i < parts.length; i++) {
                     const p = parts[i];
 
                     if (p.burst) {
-                        p.r += 0.045;
-                        if (p.r > 4.2) p.burst = 0;
+                        p.size += dt * 40;
+                        if (p.size > 44) p.burst = 0;
                     }
 
                     if (p.life > 0) {
-                        p.life -= dt * 0.75;
+                        p.life -= dt * 0.85;
                         if (p.life <= 0) {
                             p.dead = true;
                             dirty = true;
@@ -266,106 +370,87 @@
                         }
                     }
 
-                    if (still) {
-                        p.px = 0;
-                        p.py = 0;
-                        p.scared = 0;
-                        p.x = p.hx;
-                        p.y = p.hy;
-                    } else {
-                        p.px *= 0.9;
-                        p.py *= 0.9;
+                    p.rot += p.spin * dt * (1 + beat * 1.4);
 
-                        if (pointer.active) {
-                            const dx = p.x - pointer.x;
-                            const dy = p.y - pointer.y;
-                            const d = Math.hypot(dx, dy);
+                    const wobble = flow_t + p.ph;
+                    const curl =
+                        Math.sin(p.y * 0.0042 + wobble) +
+                        Math.cos(p.x * 0.0035 - wobble * 0.7 + p.ph * 1.7);
 
-                            if (d < pointer_dist) {
-                                const near = 1 - d / pointer_dist;
-                                const f = near * near * 3.5;
+                    p.dir += curl * dt * (p.petal ? 1.5 : 2.2 + beat * 2.4);
 
-                                if (d > 0.01) {
-                                    p.px += (dx / d) * f;
-                                    p.py += (dy / d) * f;
-                                } else {
-                                    p.px += (Math.random() - 0.5) * f;
-                                    p.py += (Math.random() - 0.5) * f;
-                                }
+                    const sp = p.spd * (0.8 + p.z * 0.9) * (1 + beat * 1.9);
+                    const drift_x = Math.cos(p.dir) * sp;
+                    const drift_y = Math.sin(p.dir) * sp - (p.petal ? 9 : 6) * p.z;
 
-                                p.scared = 0.22;
+                    p.ix *= Math.pow(0.9, dt * 60);
+                    p.iy *= Math.pow(0.9, dt * 60);
+
+                    if (pointer.active) {
+                        const dx = p.x - pointer.x;
+                        const dy = p.y - pointer.y;
+                        const d = Math.hypot(dx, dy);
+
+                        if (d < pointer_dist) {
+                            const near = 1 - d / pointer_dist;
+
+                            if (d > 0.01) {
+                                p.ix += (dx / d) * near * near * 1300 * dt;
+                                p.iy += (dy / d) * near * near * 1300 * dt;
                             } else {
-                                p.scared = 0;
+                                p.ix += (Math.random() - 0.5) * 500 * dt;
+                                p.iy += (Math.random() - 0.5) * 500 * dt;
                             }
+
+                            p.scared = Math.min(1, p.scared + near * dt * 5);
                         } else {
-                            p.scared = 0;
+                            p.scared *= 1 - Math.min(1, dt * 2.6);
                         }
-
-                        const amp = p.wa * (0.4 + beat * 0.9);
-                        const w = clock * p.wf + p.ph;
-                        const w2 = w * 1.61 + p.ph2;
-
-                        const bob_x = Math.sin(w) * amp + Math.sin(w2) * amp * 0.42;
-                        const bob_y = Math.cos(w * 0.87) * amp + Math.cos(w2 * 0.79) * amp * 0.42;
-
-                        let x = p.hx + bob_x + p.px;
-                        let y = p.hy + bob_y + p.py;
-
-                        if (x < -24) x += view_w + 48;
-                        else if (x > view_w + 24) x -= view_w + 48;
-
-                        if (y < -24) y += view_h + 48;
-                        else if (y > view_h + 24) y -= view_h + 48;
-
-                        p.x = x;
-                        p.y = y;
+                    } else {
+                        p.scared *= 1 - Math.min(1, dt * 2.6);
                     }
+
+                    p.ix = Math.max(-480, Math.min(480, p.ix));
+                    p.iy = Math.max(-480, Math.min(480, p.iy));
+
+                    p.x += (drift_x + p.ix) * dt;
+                    p.y += (drift_y + p.iy) * dt;
+
+                    const margin = 40;
+
+                    if (p.x < -margin) p.x = view_w + margin;
+                    else if (p.x > view_w + margin) p.x = -margin;
+
+                    if (p.y < -margin) p.y = view_h + margin;
+                    else if (p.y > view_h + margin) p.y = -margin;
 
                     const fade = edge_fade(p.x, p.y) * (p.life > 0 ? p.life : 1);
-                    const boost = p.scared ? 1 + p.scared * 2.6 : 1;
 
-                    if (fade > 0.004) {
-                        const size = p.r * (1 + beat * 1.1) * (p.scared ? 1 + p.scared : 1);
+                    if (fade <= 0.005) continue;
 
-                        ctx.beginPath();
-                        ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
-                        ctx.fillStyle = "rgba(" + pink + "," + Math.min(1, dot_alpha * fade * boost).toFixed(3) + ")";
-                        ctx.fill();
-                    }
+                    const twinkle = 0.78 + 0.22 * Math.sin(flow_t * p.tw * 2 + p.ph * 3);
 
-                    for (let j = i + 1; j < parts.length; j++) {
-                        const q = parts[j];
-                        const dx = p.x - q.x;
-                        const dy = p.y - q.y;
-                        const d2 = dx * dx + dy * dy;
+                    if (p.petal) {
+                        const a = Math.min(0.62, p.a * twinkle * (0.8 + beat * 0.35) * (1 + p.scared * 0.2) * fade);
+                        const size = p.size * (1 + beat * 0.18 + p.scared * 0.25);
 
-                        if (d2 < reach_sq) {
-                            const pair = Math.min(fade, edge_fade(q.x, q.y));
+                        ctx.save();
+                        ctx.translate(p.x, p.y);
+                        ctx.rotate(p.rot);
+                        ctx.globalAlpha = a;
+                        ctx.drawImage(petals[p.tint], -size / 2, -size / 2, size, size);
+                        ctx.restore();
+                    } else {
+                        const a = Math.min(0.58, p.a * twinkle * (0.72 + beat * 0.55) * fade);
+                        const size = p.size * (1 + beat * 0.5 + p.scared * 0.4);
 
-                            if (pair > 0.004) {
-                                const a = (1 - Math.sqrt(d2) / reach) * line_boost * pair;
-                                ctx.beginPath();
-                                ctx.moveTo(p.x, p.y);
-                                ctx.lineTo(q.x, q.y);
-                                ctx.strokeStyle = "rgba(" + pink + "," + a.toFixed(3) + ")";
-                                ctx.lineWidth = 1;
-                                ctx.stroke();
-                            }
-                        }
-
-                        if (p.scared && !q.scared) {
-                            const bx = q.x - p.x;
-                            const by = q.y - p.y;
-                            const bd = Math.hypot(bx, by);
-
-                            if (bd > 0.01 && bd < reach * 0.62) {
-                                const pull = (1 - bd / (reach * 0.62)) * p.scared * 0.9;
-                                q.px += (bx / bd) * pull;
-                                q.py += (by / bd) * pull;
-                            }
-                        }
+                        ctx.globalAlpha = a;
+                        ctx.drawImage(dusts[p.tint], p.x - size / 2, p.y - size / 2, size, size);
                     }
                 }
+
+                ctx.globalAlpha = 1;
+                ctx.globalCompositeOperation = "source-over";
 
                 if (dirty) parts = parts.filter((p) => !p.dead);
 
@@ -375,18 +460,25 @@
             function move_pointer(e) {
                 const t = e.touches ? e.touches[0] : e;
                 if (!t) return;
-                pointer.x = t.clientX;
-                pointer.y = t.clientY;
+
+                pointer.tx = t.clientX;
+                pointer.ty = t.clientY;
+
+                if (!pointer.active) {
+                    pointer.x = pointer.tx;
+                    pointer.y = pointer.ty;
+                }
+
                 pointer.active = true;
             }
 
             function pop_particle(x, y) {
-                if (reduce_motion.matches) return;
-
-                const p = make_part();
-                p.x = x;
-                p.y = y;
-                p.r = 1.1 + Math.random() * 0.9;
+                const p = make_part(x, y);
+                p.size = 16 + Math.random() * 10;
+                p.a = 0.82;
+                p.spd = 18;
+                p.ix = (Math.random() - 0.5) * 280;
+                p.iy = (Math.random() - 0.5) * 280;
                 p.burst = 1;
                 p.life = 1;
 
@@ -498,19 +590,16 @@
                 typing_timer = setTimeout(type_line, 20);
             }
 
-            if (reduce_motion.matches) {
-                rotator.textContent = lines[0];
-            } else {
+            type_line();
+            run_title();
+
+            document.addEventListener("visibilitychange", () => {
+                clearTimeout(typing_timer);
+                clearTimeout(title_timer);
+                if (document.hidden) return;
                 type_line();
                 run_title();
-                document.addEventListener("visibilitychange", () => {
-                    clearTimeout(typing_timer);
-                    clearTimeout(title_timer);
-                    if (document.hidden) return;
-                    type_line();
-                    run_title();
-                });
-            }
+            });
 
             const toast_el = document.getElementById("toast");
             let toast_timer = 0;
@@ -553,6 +642,291 @@
                 toast((await copy_text(value)) ? "copied " + value : value);
             });
 
+            const discord_scrap = document.getElementById("discord_scrap");
+            const discord_avatar = document.getElementById("discord_avatar");
+            const discord_dot = document.getElementById("discord_dot");
+            const discord_name = document.getElementById("discord_name");
+            const discord_tag = document.getElementById("discord_tag");
+            const discord_text = discord_scrap.querySelector(".discord_text");
+            const discord_line = document.getElementById("discord_line");
+            const discord_activity = document.getElementById("discord_activity");
+            const discord_art = document.getElementById("discord_art");
+            const discord_emoji = document.getElementById("discord_emoji");
+
+            const discord_page = "https://e-z.bio/ioctl";
+            const discord_socket_url = "wss://api.e-z.bio/bio/presence/ioctl";
+            const discord_cache_key = "firox_discord_snapshot_v2";
+            const discord_cache_ms = 90000;
+            const discord_status_words = {
+                online: "online",
+                idle: "idle",
+                dnd: "do not disturb",
+                offline: "offline",
+            };
+
+            let discord_socket = null;
+            let discord_retry = 0;
+            let discord_retry_timer = 0;
+            let discord_live_seen = false;
+            let discord_display_name = "Firox";
+
+            function safe_image(url) {
+                if (typeof url !== "string") return "";
+                if (!url.startsWith("https://")) return "";
+                return url;
+            }
+
+            function snapshot_from_html(text) {
+                const match = text.match(/<script id="__NEXT_DATA__"[^>]*>([\s\S]*?)<\/script>/);
+                if (!match) return null;
+
+                try {
+                    const data = JSON.parse(match[1]);
+                    const page = data && data.props && data.props.pageProps;
+
+                    if (!page || !page.bio || !page.bio.bio_presence) return null;
+
+                    return {
+                        presence: page.bio.bio_presence,
+                        display_name: typeof page.bio.name === "string" ? page.bio.name.trim() : "",
+                    };
+                } catch (err) {
+                    return null;
+                }
+            }
+
+            function apply_discord(data) {
+                if (!data) return;
+
+                if (data.pfp) {
+                    const avatar_src = safe_image(data.pfp);
+                    if (avatar_src) discord_avatar.src = avatar_src;
+                }
+
+                discord_name.textContent = discord_display_name;
+
+                if (data.tag) {
+                    const tag = String(data.tag).replace(/^@+/, "").trim();
+                    if (tag) discord_tag.textContent = "(@" + tag + ")";
+                }
+
+                const status = typeof data.status === "string" ? data.status : "offline";
+                discord_dot.hidden = false;
+                discord_dot.setAttribute("data_status", status);
+
+                const custom = data.customStatus;
+                const activities = Array.isArray(data.activities) ? data.activities.filter(Boolean) : [];
+                const first = activities[0] || null;
+
+                let line = discord_status_words[status] || status;
+                let activity_text = "";
+                let art_url = "";
+                let emoji_url = "";
+
+                if (custom && typeof custom.name === "string" && custom.name.trim()) {
+                    line = custom.name.trim();
+                    if (custom.emoji) emoji_url = custom.emoji;
+                } else if (first) {
+                    line = first.details || first.name || line;
+                }
+
+                if (first) {
+                    const bits = [];
+                    const name = typeof first.name === "string" ? first.name.trim() : "";
+                    const details = typeof first.details === "string" ? first.details.trim() : "";
+                    const state = typeof first.state === "string" ? first.state.trim() : "";
+
+                    if (name) bits.push(name);
+                    if (details && details !== line) bits.push(details);
+                    if (state) bits.push(state);
+
+                    activity_text = bits.join(" · ");
+
+                    if (first.assets) {
+                        art_url = first.assets.largeImage || first.assets.smallImage || "";
+
+                        const large_text =
+                            typeof first.assets.largeText === "string" ? first.assets.largeText.trim() : "";
+
+                        if (large_text && large_text !== name && large_text !== details) {
+                            activity_text = activity_text ? activity_text + " · " + large_text : large_text;
+                        }
+                    }
+                }
+
+                discord_line.textContent = line;
+                discord_activity.textContent = activity_text;
+                discord_activity.hidden = !activity_text;
+
+                const emoji_src = safe_image(emoji_url);
+                if (emoji_src) {
+                    discord_emoji.src = emoji_src;
+                    discord_emoji.hidden = false;
+                } else {
+                    discord_emoji.hidden = true;
+                    discord_emoji.removeAttribute("src");
+                }
+
+                const art_src = safe_image(art_url);
+                if (art_src) {
+                    discord_art.src = art_src;
+                    discord_art.hidden = false;
+                } else {
+                    discord_art.hidden = true;
+                    discord_art.removeAttribute("src");
+                }
+
+                requestAnimationFrame(fit_discord_art);
+            }
+
+            function fit_discord_art() {
+                if (discord_art.hidden) return;
+
+                const text_box = discord_text.getBoundingClientRect();
+                if (!text_box.height) return;
+
+                discord_art.style.height = text_box.height + "px";
+                discord_art.style.aspectRatio = "auto";
+                discord_art.style.alignSelf = "center";
+                discord_art.style.transform = "none";
+
+                const art_box = discord_art.getBoundingClientRect();
+                discord_art.style.transform = "translateY(" + (text_box.top - art_box.top) + "px)";
+            }
+
+            function read_discord_cache() {
+                try {
+                    const raw = sessionStorage.getItem(discord_cache_key);
+                    if (!raw) return null;
+
+                    const parsed = JSON.parse(raw);
+                    if (!parsed || !parsed.at || !parsed.presence) return null;
+                    if (Date.now() - parsed.at > discord_cache_ms) return null;
+
+                    return parsed;
+                } catch (err) {
+                    return null;
+                }
+            }
+
+            function cache_discord(presence, display_name) {
+                try {
+                    sessionStorage.setItem(
+                        discord_cache_key,
+                        JSON.stringify({ at: Date.now(), presence: presence, display_name: display_name })
+                    );
+                } catch (err) {}
+            }
+
+            async function load_discord_snapshot() {
+                const cached = read_discord_cache();
+                if (cached) {
+                    if (cached.display_name) {
+                        discord_display_name = cached.display_name;
+                        discord_name.textContent = discord_display_name;
+                    }
+                    apply_discord(cached.presence);
+                    return;
+                }
+
+                const controller = new AbortController();
+                const timer = setTimeout(() => controller.abort(), 10000);
+
+                try {
+                    const res = await fetch("https://r.jina.ai/" + discord_page, {
+                        headers: { "x-respond-with": "html" },
+                        signal: controller.signal,
+                    });
+
+                    if (!res.ok) throw new Error("http " + res.status);
+
+                    const html = await res.text();
+                    const snapshot = snapshot_from_html(html);
+                    if (!snapshot) throw new Error("presence missing");
+
+                    if (snapshot.display_name) {
+                        discord_display_name = snapshot.display_name;
+                        discord_name.textContent = discord_display_name;
+                    }
+
+                    if (!discord_live_seen) {
+                        apply_discord(snapshot.presence);
+                        cache_discord(snapshot.presence, discord_display_name);
+                    }
+                } catch (err) {
+                    console.warn("discord snapshot failed: " + err.message);
+                } finally {
+                    clearTimeout(timer);
+                }
+            }
+
+            function schedule_discord_retry() {
+                if (discord_retry_timer) return;
+
+                const delay = Math.min(60000, 4000 * Math.pow(2, discord_retry));
+                discord_retry = Math.min(discord_retry + 1, 5);
+
+                discord_retry_timer = setTimeout(() => {
+                    discord_retry_timer = 0;
+                    if (!document.hidden) connect_discord();
+                }, delay);
+            }
+
+            function connect_discord() {
+                if (!("WebSocket" in window)) return;
+                if (discord_socket && (discord_socket.readyState === 0 || discord_socket.readyState === 1)) return;
+
+                try {
+                    discord_socket = new WebSocket(discord_socket_url);
+                } catch (err) {
+                    schedule_discord_retry();
+                    return;
+                }
+
+                discord_socket.addEventListener("open", () => {
+                    discord_retry = 0;
+                    try {
+                        discord_socket.send("Connection established");
+                    } catch (err) {}
+                });
+
+                discord_socket.addEventListener("message", (event) => {
+                    if (event.data === "connected") return;
+
+                    try {
+                        const data = JSON.parse(String(event.data));
+                        discord_live_seen = true;
+                        apply_discord(data);
+                        cache_discord(data, discord_display_name);
+                    } catch (err) {}
+                });
+
+                discord_socket.addEventListener("close", () => {
+                    discord_socket = null;
+                    if (document.hidden) return;
+                    schedule_discord_retry();
+                });
+
+                discord_socket.addEventListener("error", () => {
+                    try {
+                        discord_socket.close();
+                    } catch (err) {}
+                });
+            }
+
+            document.addEventListener("visibilitychange", () => {
+                if (!document.hidden) connect_discord();
+            });
+
+            addEventListener("resize", () => requestAnimationFrame(fit_discord_art), { passive: true });
+
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(fit_discord_art).catch(() => {});
+            }
+
+            load_discord_snapshot();
+            connect_discord();
+
             const audio = document.getElementById("audio");
             const root = document.documentElement;
 
@@ -564,7 +938,6 @@
             const back_btn = document.getElementById("back");
             const fwd_btn = document.getElementById("fwd");
             const mute_btn = document.getElementById("mute");
-            const vol_box = document.getElementById("vol");
             const vol_range = document.getElementById("vol_range");
             const seek = document.getElementById("seek");
             const wave = document.getElementById("wave");
@@ -574,8 +947,13 @@
 
             const song_folder = "assets/Songs";
             const repo_api = "https://api.github.com/repos/FlR0x/my-website/contents/";
-            const cache_key = "firox_songs_v1";
+            const repo_raw = "https://raw.githubusercontent.com/FlR0x/my-website/main/";
+            const cache_key = "firox_songs_v2";
             let songs = [];
+
+            function repo_file(path) {
+                return repo_raw + path.split("/").map(encodeURIComponent).join("/");
+            }
 
             function split_name(stem) {
                 const cut = stem.indexOf(" - ");
@@ -600,31 +978,35 @@
             }
 
             function build_from_listing(files) {
-                const stems = new Set();
+                const tracks = new Map();
                 const covers = new Map();
 
                 for (const f of files) {
                     if (f.type !== "file") continue;
-                    if (/\.mp3$/i.test(f.name)) stems.add(f.name.replace(/\.mp3$/i, ""));
 
-                    if (/\.jpg$/i.test(f.name)) {
-                        const base = f.name.replace(/\.jpg$/i, "");
-                        covers.set(fold(base), f.name);
-                        covers.set(loose(base), f.name);
+                    if (/\.mp3$/i.test(f.name)) {
+                        const stem = f.name.replace(/\.mp3$/i, "");
+                        tracks.set(stem, f.download_url || repo_file(song_folder + "/" + f.name));
+                    }
+
+                    if (/\.(jpe?g|png|webp)$/i.test(f.name)) {
+                        const base = f.name.replace(/\.(jpe?g|png|webp)$/i, "");
+                        const url = f.download_url || repo_file(song_folder + "/" + f.name);
+                        covers.set(fold(base), url);
+                        covers.set(loose(base), url);
                     }
                 }
 
                 const built = [];
 
-                for (const stem of stems) {
+                for (const [stem, url] of tracks) {
                     const names = split_name(stem);
-                    const cover_name = find_cover(stem, covers);
 
                     built.push({
                         artist: names.artist,
                         title: names.title,
-                        file: song_folder + "/" + stem + ".mp3",
-                        cover: cover_name ? song_folder + "/" + cover_name : "",
+                        file: url,
+                        cover: find_cover(stem, covers),
                     });
                 }
 
@@ -648,23 +1030,36 @@
                 } catch (err) {}
 
                 try {
-                    const res = await fetch(repo_api + song_folder + "?ref=main", {
-                        headers: { Accept: "application/vnd.github+json" },
-                    });
+                    let built = null;
+                    let last_error = null;
 
-                    if (!res.ok) throw new Error("http " + res.status);
+                    for (let attempt = 0; attempt < 3 && !built; attempt++) {
+                        try {
+                            const res = await fetch(repo_api + song_folder + "?ref=main", {
+                                headers: { Accept: "application/vnd.github+json" },
+                            });
 
-                    const files = await res.json();
-                    const built = build_from_listing(files);
+                            if (!res.ok) throw new Error("http " + res.status);
 
-                    if (!built.length) throw new Error("no tracks found");
+                            const files = await res.json();
+                            built = build_from_listing(files);
+
+                            if (!built.length) throw new Error("no tracks found");
+                        } catch (err) {
+                            last_error = err;
+                            if (attempt < 2) {
+                                await new Promise((resolve) => setTimeout(resolve, 900 * (attempt + 1)));
+                            }
+                        }
+                    }
+
+                    if (!built) throw last_error || new Error("no tracks found");
 
                     songs = built;
                     localStorage.setItem(cache_key, JSON.stringify({ at: Date.now(), list: built }));
                     console.log("songs discovered from repo: " + songs.length);
                 } catch (err) {
-                    console.warn("song discovery failed, using fallback: " + err.message);
-                    songs = songs.length ? songs : [];
+                    console.warn("song discovery failed: " + err.message);
                 }
             }
 
@@ -674,27 +1069,8 @@
             });
 
             let song_at = 0;
-            let played = [];
             const history = [];
             let history_at = -1;
-
-            function pick_song() {
-                if (songs.length < 2) return 0;
-
-                let next = song_at;
-
-                while (next === song_at || played.includes(next)) {
-                    next = Math.floor(Math.random() * songs.length);
-                }
-
-                played.push(next);
-
-                if (played.length >= songs.length) {
-                    played = [next];
-                }
-
-                return next;
-            }
 
             function remember(index) {
                 history.length = history_at + 1;
@@ -714,15 +1090,20 @@
                     return;
                 }
 
-                go(pick_song(), autoplay);
+                if (!songs.length) return;
+                go((song_at + 1) % songs.length, autoplay);
             }
 
             function go_back(autoplay) {
-                if (history_at <= 0) return null;
+                if (history_at > 0) {
+                    history_at--;
+                    load_song(history[history_at], autoplay);
+                    return history[history_at];
+                }
 
-                history_at--;
-                load_song(history[history_at], autoplay);
-                return history[history_at];
+                if (!songs.length) return null;
+                go((song_at - 1 + songs.length) % songs.length, autoplay);
+                return song_at;
             }
 
             audio.volume = 0.12;
@@ -737,7 +1118,6 @@
             let high = 0;
             let meter_frame = 0;
             let dragging = false;
-            let entered = false;
             let loading_song = false;
             let play_token = 0;
             let load_token = 0;
@@ -745,13 +1125,15 @@
             const broken_tracks = [];
 
             function load_song(index, autoplay) {
+                if (!songs.length) return;
+
                 song_at = (index + songs.length) % songs.length;
                 const song = songs[song_at];
 
                 load_token++;
                 loading_song = true;
 
-                cover.src = song.cover;
+                cover.src = song.cover || "assets/astolfo_pink.png";
                 artist_el.textContent = song.artist;
                 song_el.textContent = song.title;
                 audio.src = song.file;
@@ -917,21 +1299,41 @@
                 const bar_w = Math.max(1.5, (wave_w - (wave_bars - 1) * 2) / wave_bars);
                 const edge = smooth_progress * wave_bars;
 
+                wave_ctx.fillStyle = "rgba(94, 55, 69, 0.09)";
+                wave_ctx.fillRect(0, mid - 0.5, wave_w, 1);
+
                 for (let i = 0; i < wave_bars; i++) {
                     const h = Math.max(1.5, wave_shape[i] * max_h);
                     const x = i * (bar_w + 2);
                     const dist = edge - i;
 
                     const fade = Math.max(0, Math.min(1, dist + 0.5));
-                    const a = 0.16 + 0.69 * fade;
+                    const a = 0.24 + 0.66 * fade;
 
-                    wave_ctx.fillStyle = "rgba(255,185,255," + a.toFixed(3) + ")";
+                    wave_ctx.fillStyle =
+                        fade > 0.5
+                            ? "rgba(177, 75, 108, " + a.toFixed(3) + ")"
+                            : "rgba(112, 76, 89, 0.18)";
 
                     const bar_h = h * 2;
                     wave_ctx.beginPath();
                     wave_ctx.roundRect(x, mid - bar_h / 2, bar_w, bar_h, bar_w / 2);
                     wave_ctx.fill();
                 }
+
+                const head_x = Math.max(0.75, Math.min(wave_w - 0.75, smooth_progress * wave_w));
+
+                wave_ctx.strokeStyle = "rgba(155, 54, 88, 0.58)";
+                wave_ctx.lineWidth = 1.4;
+                wave_ctx.beginPath();
+                wave_ctx.moveTo(head_x, mid - max_h * 0.98);
+                wave_ctx.lineTo(head_x, mid + max_h * 0.98);
+                wave_ctx.stroke();
+
+                wave_ctx.fillStyle = "rgba(168, 62, 97, 0.9)";
+                wave_ctx.beginPath();
+                wave_ctx.arc(head_x, mid - max_h * 0.98, 2.1, 0, Math.PI * 2);
+                wave_ctx.fill();
             }
 
             let smooth_progress = 0;
@@ -959,7 +1361,6 @@
                 play_btn.title = playing ? "pause" : "play";
                 mute_btn.setAttribute("aria-label", audio.muted ? "unmute" : "mute");
                 mute_btn.title = audio.muted ? "unmute" : "mute";
-                vol_box.classList.toggle("off", audio.muted || audio.volume === 0);
                 mute_btn.classList.toggle("off", audio.muted || audio.volume === 0);
                 vol_range.style.setProperty("--level", String(audio.muted ? 0 : Math.round(audio.volume * 100)));
             }
@@ -1023,6 +1424,8 @@
             }
 
             function play_audio() {
+                if (!audio.src) return;
+
                 const token = ++play_token;
 
                 try {
@@ -1082,6 +1485,30 @@ back_btn.addEventListener("click", () => {
 
             fwd_btn.addEventListener("click", () => go_next(!audio.paused));
 
+            addEventListener("keydown", (event) => {
+                if (event.code !== "Space" && event.key !== " ") return;
+                if (event.repeat) return;
+
+                const target = event.target;
+                if (target instanceof HTMLElement) {
+                    const tag = target.tagName;
+                    if (
+                        tag === "INPUT" ||
+                        tag === "TEXTAREA" ||
+                        tag === "SELECT" ||
+                        tag === "BUTTON" ||
+                        target.isContentEditable
+                    ) {
+                        return;
+                    }
+                }
+
+                event.preventDefault();
+
+                if (audio.paused) play_audio();
+                else audio.pause();
+            });
+
             mute_btn.addEventListener("click", () => {
                 audio.muted = !audio.muted;
                 if (!audio.muted && audio.volume === 0) audio.volume = 0.12;
@@ -1136,11 +1563,12 @@ back_btn.addEventListener("click", () => {
             audio.addEventListener("error", () => {
                 loading_song = false;
 
-                if (song_token !== load_token) return;
+                if (!songs.length) return;
 
                 const code = audio.error ? audio.error.code : 0;
                 if (code === 1) return;
 
+                const resume = !audio.paused;
                 const broken = songs[song_at].file;
 
                 if (!broken_tracks.includes(broken)) {
@@ -1154,7 +1582,7 @@ back_btn.addEventListener("click", () => {
                     return;
                 }
 
-                load_song(song_at + 1, !audio.paused);
+                load_song(song_at + 1, resume);
             });
 
             audio.addEventListener("loadedmetadata", () => {
@@ -1162,115 +1590,6 @@ back_btn.addEventListener("click", () => {
                 song_token = load_token;
                 sync();
             });
-
-            function reveal() {
-                if (entered) return;
-                entered = true;
-
-                document.getElementById("gate").classList.add("gone");
-                player.classList.add("show");
-            }
-
-            function enter() {
-                reveal();
-                play_audio();
-            }
-
-            const gate = document.getElementById("gate");
-
-            for (const name of ["pointerdown", "touchstart", "click", "keydown"]) {
-                gate.addEventListener(name, enter, { passive: true });
-            }
-
-            addEventListener("keydown", (e) => {
-                if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") enter();
-            });
-
-            setTimeout(reveal, 6000);
-
-            function on_pref_change() {
-                seed();
-                if (reduce_motion.matches) {
-                    root.style.setProperty("--pulse", "0");
-                    level = 0;
-                }
-            }
-
-            if (reduce_motion.addEventListener) {
-                reduce_motion.addEventListener("change", on_pref_change);
-            } else if (reduce_motion.addListener) {
-                reduce_motion.addListener(on_pref_change);
-            }
-
-            const guild_icon = document.getElementById("guild_icon");
-            const guild_name = document.getElementById("guild_name");
-            const guild_online = document.getElementById("guild_online");
-            const guild_members = document.getElementById("guild_members");
-            const guild_join = document.getElementById("guild_join");
-            const guild_code = "pqbYNMDCm8";
-            const guild_box = document.getElementById("guild");
-
-            function guild_aim(e) {
-                const box = guild_box.getBoundingClientRect();
-                if (!box.width || !box.height) return;
-
-                const nx = ((e.clientX - box.left) / box.width) * 2 - 1;
-                const ny = ((e.clientY - box.top) / box.height) * 2 - 1;
-
-                guild_box.style.setProperty("--mx", (nx * 34).toFixed(1) + "px");
-                guild_box.style.setProperty("--my", (ny * 18).toFixed(1) + "px");
-            }
-
-            function guild_enter(e) {
-                guild_aim(e);
-                guild_box.style.setProperty("--guild_glow", "1");
-            }
-
-            function guild_leave() {
-                guild_box.style.setProperty("--guild_glow", "0");
-                guild_box.style.setProperty("--mx", "0px");
-                guild_box.style.setProperty("--my", "0px");
-            }
-
-            guild_box.addEventListener("pointerenter", guild_enter);
-            guild_box.addEventListener("pointermove", guild_aim);
-            guild_box.addEventListener("pointerleave", guild_leave);
-
-            const fmt_num = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-            let guild_timer = 0;
-
-            async function load_guild() {
-                try {
-                    const res = await fetch("https://discord.com/api/v10/invites/" + guild_code + "?with_counts=true", {
-                        headers: { Accept: "application/json" },
-                    });
-
-                    if (!res.ok) throw new Error("http " + res.status);
-
-                    const data = await res.json();
-
-                    if (data.guild && data.guild.name) guild_name.textContent = data.guild.name;
-                    if (data.guild && data.guild.icon) {
-                        guild_icon.src = "https://cdn.discordapp.com/icons/" + data.guild.id + "/" + data.guild.icon + ".png?size=128";
-                    }
-
-                    if (typeof data.approximate_presence_count === "number") {
-                        guild_online.textContent = fmt_num(data.approximate_presence_count) + " Online";
-                    }
-
-                    if (typeof data.approximate_member_count === "number") {
-                        guild_members.textContent = fmt_num(data.approximate_member_count) + " Members";
-                    }
-
-                    if (data.code) guild_join.href = "https://discord.gg/" + data.code;
-                } catch (err) {
-                    guild_online.textContent = "offline";
-                }
-            }
-
-            load_guild();
-            guild_timer = setInterval(load_guild, 300000);
 
             if (window.ResizeObserver) {
                 const observe = new ResizeObserver(() => {
@@ -1289,10 +1608,17 @@ back_btn.addEventListener("click", () => {
             track_player();
             build_wave();
             loop_wave();
+            meter();
             sync();
 
             load_songs().then(() => {
-                go(Math.floor(Math.random() * songs.length), false);
+                if (!songs.length) {
+                    song_el.textContent = "no tracks found";
+                    sync();
+                    return;
+                }
+
+                if (!audio.src) go(Math.floor(Math.random() * songs.length), false);
                 sync();
             });
         })();
